@@ -1,6 +1,10 @@
 #coding: utf-8
 import threading
 from flask import *
+<<<<<<< HEAD
+=======
+from flask_cors import CORS
+>>>>>>> origin/testserver-dev
 import json
 import time
 import datetime
@@ -45,5 +49,6 @@ def logout():
     })
 
 if __name__ == '__main__':
+    CORS(app, supports_credentials=True)
     app.run(debug=True, port=8099, threaded=True)
     
