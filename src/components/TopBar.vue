@@ -9,8 +9,20 @@
             width="600"
             trigger="click"
         >
-            <Login/>
+            <SignUp @login="login"/>
             <el-button slot="reference">Sign Up</el-button>
+        </el-popover>
+
+        <el-popover
+            v-if="!hasLogin"
+            class="item"
+            placement="left"
+            title="Login"
+            width="600"
+            trigger="click"
+        >
+            <Login @login="login"/>
+            <el-button slot="reference">Login</el-button>
         </el-popover>
 
         <!-- <el-menu-item v-if="hasLogin" class="nav" index="logout"> -->
@@ -23,23 +35,34 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import SignUp from "@/components/SignUp.vue";
 import Login from "@/components/Login.vue";
 
 @Component({
     components: {
+        SignUp,
         Login
     }
 })
 export default class Button extends Vue {
-    hasLogin: Boolean = true;
+    hasLogin: Boolean = false;
     handleSelect(key: Object, keyPath: Object) {
         console.log(key, keyPath);
     }
     logout(): void {
-        this.hasLogin = false;
-        fetch("/api/logout");
+        fetch("/api/logout")
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                if (data.code === 0) {
+                    this.hasLogin = false;
+                }
+            })
     }
-    login(): void {}
+    login(): void {
+        this.hasLogin = true;
+    }
 }
 </script>
 
@@ -49,5 +72,6 @@ export default class Button extends Vue {
 }
 .item {
     float: right !important;
+    margin: 10px;
 }
 </style>

@@ -13,6 +13,9 @@
     <el-form-item label="Password" prop="pass">
       <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
     </el-form-item>
+    <el-form-item label="Confirm" prop="checkPass">
+      <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
       <el-button @click="resetForm('ruleForm')">Reset</el-button>
@@ -28,13 +31,14 @@ interface Callback {
     (err?: Error): any
 };
 
-interface LoginComponent extends Vue{
+interface SignUpComponent extends Vue{
   resetFields(): void,
   validate(valid: object): boolean
+
 }
 
 @Component
-export default class Login extends Vue {
+export default class SignUp extends Vue {
     checkUsername(rule: object, value :number, callback: Callback) {
       if (!value) {
         return callback(new Error("Please input user name"));
@@ -50,21 +54,37 @@ export default class Login extends Vue {
       else if (value.length < 6) {
         callback(new Error("Place enter password longer than 6 characters"))
       }
-      callback();
+      else {
+        if (this.ruleForm.checkPass !== "") {
+          (this.$refs.ruleForm as any).validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    validatePass2(rule: object, value: string, callback: Callback) {
+      if (value === "") {
+        callback(new Error("Please input the password again"));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error("Two inputs don't match!"));
+      } else {
+        callback();
+      }
     };
     ruleForm = {
       pass: "",
+      checkPass: "",
       username: "",
     }
     rules = {
       pass: [{ validator: this.validatePass, trigger: "blur" }],
+      checkPass: [{ validator: this.validatePass2, trigger: "blur" }],
       username: [{ validator: this.checkUsername, trigger: "blur" }]
     }
     submitForm(formName: string) {
       console.log(formName);
-      (this.$refs[formName] as LoginComponent).validate((valid: any) => {
+      (this.$refs[formName] as SignUpComponent).validate((valid: any) => {
         if (valid) {
-          fetch('/api/login', {
+          fetch('/api/signup', {
             method: 'POST',
             body: JSON.stringify({
               username: this.ruleForm.username,
@@ -91,7 +111,7 @@ export default class Login extends Vue {
       });
     }
     resetForm(formName: string) {
-      (this.$refs[formName] as LoginComponent).resetFields();
+      (this.$refs[formName] as SignUpComponent).resetFields();
     }
 };
 </script>
