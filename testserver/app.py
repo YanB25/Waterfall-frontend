@@ -34,7 +34,9 @@ def login():
         else:
             return json.dumps({
                 "code" : 1,
-                "data" : "not logged in yet"
+                "data" : {
+                    "msg": "not logged in yet"
+                }
             })
 
 
@@ -61,7 +63,9 @@ def signup():
         else:
             return json.dumps({
                 "code" : 1,
-                "data" : "not logged in yet"
+                "data" : {
+                    "msg" :"not logged in yet"
+                }
             })
 
 
@@ -70,8 +74,28 @@ def logout():
     session.clear()
     return json.dumps({
         "code" : 0,
-        "data" : "successfully logged out"
+        "data" : {
+            "msg" : "successfully logged out"
+        }
     })
+
+@app.route('/apis/username')
+def username():
+    if request.method == 'GET':
+        name = request.args.get('username')
+        if name == 'yanbin':
+            return json.dumps({
+                "code": 1,
+                "data": {
+                    "msg": "username already be used"
+                }
+            })
+        return json.dumps({
+            "code": 0,
+            "data": {
+                "msg": "username {} is available".format(name)
+            }
+        })
 
 if __name__ == '__main__':
     CORS(app, supports_credentials=True)

@@ -25,27 +25,26 @@
             <el-button slot="reference">Login</el-button>
         </el-popover>
 
-        <!-- <el-menu-item v-if="hasLogin" class="nav" index="logout"> -->
-        <el-button v-if="hasLogin" class="item" @click="logout">Log Out</el-button>
-        <!-- </el-menu-item> -->
-        <!-- <el-menu-item index="3" disabled>Info</el-menu-item> -->
-        <!-- <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item> -->
+        <username v-if="hasLogin" class="item" :username="username" @logout="logout"> </username>
     </el-menu>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import SignUp from "@/components/SignUp.vue";
-import Login from "@/components/Login.vue";
+import SignUp from "./SignUp.vue";
+import Login from "./Login.vue";
+import Username from './Username.vue';
 
 @Component({
     components: {
         SignUp,
-        Login
+        Login,
+        Username
     }
 })
 export default class Button extends Vue {
     hasLogin: Boolean = false;
+    username: String = '';
     handleSelect(key: Object, keyPath: Object) {
         console.log(key, keyPath);
     }
@@ -60,8 +59,10 @@ export default class Button extends Vue {
                 }
             })
     }
-    login(): void {
+    login(username: string): void {
         this.hasLogin = true;
+        this.username = username;
+        console.log(username);
     }
 }
 </script>

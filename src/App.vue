@@ -22,7 +22,7 @@ import VueRouter from 'vue-router'
 
 import LeftMenu from '@/components/LeftMenu.vue'
 import Button from '@/components/Button.vue'
-import TopBar from '@/components/TopBar.vue'
+import TopBar from '@/components/topbar/TopBar.vue'
 
 const routes = [
   { path: '/button', component: Button }
