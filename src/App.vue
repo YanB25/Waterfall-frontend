@@ -1,7 +1,12 @@
 <template>
   <div id="app">
+
+    <el-row>
+      <TopBar />
+    </el-row>
     <el-col :span=4>
-      <NavMenu />
+
+      <LeftMenu />
     </el-col>
 
     <img src="./assets/logo.png">
@@ -15,8 +20,9 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import VueRouter from 'vue-router'
 
-import NavMenu from '@/components/NavMenu.vue'
-import Button from './components/Button.vue'
+import LeftMenu from '@/components/LeftMenu.vue'
+import Button from '@/components/Button.vue'
+import TopBar from '@/components/TopBar.vue'
 
 const routes = [
   { path: '/button', component: Button }
@@ -28,7 +34,8 @@ const router = new VueRouter({
 @Component({
   components: {
     Button,
-    NavMenu
+    LeftMenu,
+    TopBar
   }
 })
 export default class App extends Vue {
@@ -47,7 +54,7 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 
 </style>

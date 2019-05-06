@@ -6,14 +6,15 @@
       default-active="2"
       class="el-menu-vertical-demo"
       @open="handleOpen"
-      @close="handleClose">
+      @close="handleClose"
+      :router=true>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1" @click="nav_11">item one</el-menu-item>
+          <el-menu-item index="1-1">item one</el-menu-item>
           <el-menu-item index="1-2">item one</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="Group Two">
@@ -54,6 +55,7 @@ export default class Button extends Vue {
     }
     nav_11() {
       console.log("ok");
+      this.$router.push('/nav/11')
     }
 }
 </script>
