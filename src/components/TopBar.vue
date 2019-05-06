@@ -1,42 +1,45 @@
 <template>
-<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">Processing Center</el-menu-item>
-    <el-submenu index="2" class="nav">
-        <template slot="title">Workspace</template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-        <el-submenu index="2-4">
-        <template slot="title">item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-        </el-submenu>
-    </el-submenu>
-    <!-- <el-menu-item index="3" disabled>Info</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item> -->
-</el-menu>
+  <el-menu
+    class="el-menu-demo"
+    mode="horizontal"
+    @select="handleSelect"
+  >
+    <el-menu-item index="1">Processing Center</el-menu-item>
+    <el-menu-item class="nav" index="login">
+      <el-popover
+        placement="left"
+        title="Sign Up"
+        width="600"
+        trigger="click"
+      >
+      <Login/>
+
+        <el-button slot="reference">Sign up</el-button>
+      </el-popover>
+    </el-menu-item>
+    <!-- <el-menu-item index="3" disabled>Info</el-menu-item> -->
+    <!-- <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item> -->
+  </el-menu>
 </template>
 
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import Login from '@/components/Login.vue'
 
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1'
-      };
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
+@Component({
+    components: {
+        Login
     }
-  }
+})
+export default class Button extends Vue {
+    handleSelect(key: Object, keyPath: Object) {
+        console.log(key, keyPath)
+    }
+}
 </script>
 
 <style>
 .nav {
-    float: right !important;
+  float: right !important;
 }
 </style>
