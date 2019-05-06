@@ -37,6 +37,34 @@ def login():
                 "data" : "not logged in yet"
             })
 
+
+@app.route("/apis/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        session['currentUser'] = "admin"
+        return json.dumps({
+                "code" : 0,
+                "data" : {
+                    "username" : session['currentUser'],
+                    "msg" : "logged in"
+                }
+            })
+    if request.method == "GET":
+        if 'currentUser' in session:
+            return json.dumps({
+                "code" : 0,
+                "data" : {
+                    "username" : session['currentUser'],
+                    "msg" : "already logged in"
+                }
+            })
+        else:
+            return json.dumps({
+                "code" : 1,
+                "data" : "not logged in yet"
+            })
+
+
 @app.route('/apis/logout')
 def logout():
     session.clear()
