@@ -44,7 +44,7 @@ export default class SignUp extends Vue {
     }
     setTimeout(() => {
       let username = this.ruleForm.username;
-      fetch(`/api/username?username=${username}`)
+      fetch(`/api/checkuser/${username}`)
         .then(res => {
           return res.json();
         })

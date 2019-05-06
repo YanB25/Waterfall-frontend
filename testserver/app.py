@@ -79,11 +79,10 @@ def logout():
         }
     })
 
-@app.route('/apis/username')
-def username():
+@app.route('/apis/checkuser/<username>')
+def checkuser(username):
     if request.method == 'GET':
-        name = request.args.get('username')
-        if name == 'yanbin':
+        if username == 'yanbin':
             return json.dumps({
                 "code": 1,
                 "data": {
@@ -93,7 +92,7 @@ def username():
         return json.dumps({
             "code": 0,
             "data": {
-                "msg": "username {} is available".format(name)
+                "msg": "username {} is available".format(username)
             }
         })
 
