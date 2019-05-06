@@ -16,6 +16,16 @@
     <el-form-item label="Confirm" prop="checkPass">
       <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
     </el-form-item>
+    <el-form-item label="User Type">
+      <el-select v-model="ruleForm.usertype" placeholder="not chose yet">
+        <el-option
+          v-for="item in usertypes"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
+      </el-select>
+    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
       <el-button @click="resetForm('ruleForm')">Reset</el-button>
@@ -52,9 +62,9 @@ export default class SignUp extends Vue {
           if (data.code === 0) {
             callback();
           } else {
-            callback(new Error(data.data.msg))
+            callback(new Error(data.data.msg));
           }
-        })
+        });
       // callback();
     }, 1000);
   }
@@ -82,13 +92,24 @@ export default class SignUp extends Vue {
   ruleForm = {
     pass: "",
     checkPass: "",
-    username: ""
+    username: "",
+    usertype: "",
   };
   rules = {
     pass: [{ validator: this.validatePass, trigger: "blur" }],
     checkPass: [{ validator: this.validatePass2, trigger: "blur" }],
     username: [{ validator: this.checkUsername, trigger: "blur" }]
   };
+  usertypes = [
+    {
+      value: 0,
+      label: "微供应商"
+    },
+    {
+      value: 0,
+      label: "采购商"
+    }
+  ]
   submitForm(formName: string) {
     console.log(formName);
     (this.$refs[formName] as SignUpComponent).validate((valid: any) => {
@@ -97,7 +118,8 @@ export default class SignUp extends Vue {
           method: "POST",
           body: JSON.stringify({
             username: this.ruleForm.username,
-            password: this.ruleForm.pass
+            password: this.ruleForm.pass,
+            usertype: this.ruleForm.usertype
           })
         })
           .then(res => {
