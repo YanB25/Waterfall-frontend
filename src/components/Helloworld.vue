@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p> hello world </p>
+        <p> Please LOGIN first. </p>
     </div>
 </template>
 
