@@ -12,7 +12,7 @@
     <!-- <img src="./assets/logo.png">
     <Button :msg="m" @click.native="hei"> </Button> -->
     <el-col :span=16 :offset=2>
-      <router-view class="main" :userid="userid" />
+      <router-view class="main" :userid="userid" :username="username"/>
     </el-col>
   </div>
 </template>
@@ -43,7 +43,7 @@ const router = new VueRouter({
 export default class App extends Vue {
   m = "hello";
   userid: number = -1;
-  username: string | undefined = undefined;
+  username: string = "";
 
   hei() :void {
    this.m = "changed";
@@ -64,7 +64,7 @@ export default class App extends Vue {
    this.userid = userid;
  }
  logout() {
-   this.username = undefined;
+   this.username = "";
    this.userid = -1;
  }
 }
