@@ -106,7 +106,7 @@ export default class SignUp extends Vue {
       label: "微供应商"
     },
     {
-      value: 0,
+      value: 1,
       label: "采购商"
     }
   ]
@@ -127,7 +127,7 @@ export default class SignUp extends Vue {
           })
           .then(data => {
             if (data.code === 0) {
-              this.$emit("login", data.data.username);
+              this.$emit("login", data.data.username, data.data.userid);
             }
           })
           .catch(err => {

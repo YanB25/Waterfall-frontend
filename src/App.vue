@@ -2,16 +2,18 @@
   <div id="app">
 
     <el-row>
-      <TopBar />
+      <TopBar @login="login" @logout="logout"/>
     </el-row>
     <el-col :span=4>
 
       <LeftMenu />
     </el-col>
 
-    <img src="./assets/logo.png">
-    <Button :msg="m" @click.native="hei"> </Button>
-    <router-view/>
+    <!-- <img src="./assets/logo.png">
+    <Button :msg="m" @click.native="hei"> </Button> -->
+    <el-col :span=16 :offset=2>
+      <router-view class="main" :userid="userid" />
+    </el-col>
   </div>
 </template>
 
@@ -40,9 +42,30 @@ const router = new VueRouter({
 })
 export default class App extends Vue {
   m = "hello";
+  userid: number = -1;
+  username: string | undefined = undefined;
 
   hei() :void {
    this.m = "changed";
+ }
+ beforeCreated() {
+   fetch('/api/login', {
+     method: 'GET',
+   }).then(res => {
+     return res.json();
+   }).then(data => {
+     if (data.code === 0) {
+       this.userid = data.data.userid;
+     }
+   })
+ }
+ login(username: string, userid: number) {
+   this.username = username;
+   this.userid = userid;
+ }
+ logout() {
+   this.username = undefined;
+   this.userid = -1;
  }
 }
 </script>
@@ -55,6 +78,10 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
+}
+
+.main {
+  margin-top: 50px;
 }
 
 </style>

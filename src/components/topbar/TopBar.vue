@@ -45,6 +45,7 @@ import Username from './Username.vue';
 export default class Button extends Vue {
     hasLogin: Boolean = false;
     username: String = '';
+    userid: Number = 0;
     handleSelect(key: Object, keyPath: Object) {
         console.log(key, keyPath);
     }
@@ -56,13 +57,17 @@ export default class Button extends Vue {
             .then(data => {
                 if (data.code === 0) {
                     this.hasLogin = false;
+                    this.$emit('logout');
                 }
             })
     }
-    login(username: string): void {
+    login(username: string, userid: number): void {
         this.hasLogin = true;
         this.username = username;
+        this.userid = userid;
         console.log(username);
+        console.log(userid);
+        this.$emit('login', username, userid);
     }
 }
 </script>

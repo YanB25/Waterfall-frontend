@@ -19,6 +19,7 @@ def login():
                 "code" : 0,
                 "data" : {
                     "username" : session['currentUser'],
+                    "userid" : 0,
                     "msg" : "logged in"
                 }
             })
@@ -28,6 +29,7 @@ def login():
                 "code" : 0,
                 "data" : {
                     "username" : session['currentUser'],
+                    "userid" : 0,
                     "msg" : "already logged in"
                 }
             })
@@ -48,6 +50,7 @@ def signup():
                 "code" : 0,
                 "data" : {
                     "username" : session['currentUser'],
+                    "userid" : 0,
                     "msg" : "logged in"
                 }
             })
@@ -55,8 +58,10 @@ def signup():
         if 'currentUser' in session:
             return json.dumps({
                 "code" : 0,
+                "userid" : 0,
                 "data" : {
                     "username" : session['currentUser'],
+                    "userid" : 0,
                     "msg" : "already logged in"
                 }
             })
@@ -93,6 +98,33 @@ def checkuser(username):
             "code": 0,
             "data": {
                 "msg": "username {} is available".format(username)
+            }
+        })
+
+
+@app.route('/apis/user/<userid>')
+def userProfile(userid):
+    if request.method == 'GET':
+        if userid == 'undefined':
+            return json.dumps({
+                'code': 1
+            })
+        return json.dumps({
+            "code": 0,
+            "data": {
+                "username": "username-for-{}".format(userid),
+                "email": "user{}@mail2.sysu.edu.cn".format(userid),
+                "phone": "13838383838",
+                "balance": 23,
+                "role": 0,
+                "status": 0
+            }
+        })
+    if request.method == 'POST':
+        return json.dumps({
+            "code": 0,
+            "data": {
+                "msg": "success"
             }
         })
 

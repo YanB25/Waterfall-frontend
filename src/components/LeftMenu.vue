@@ -1,61 +1,64 @@
 <template>
-<el-row class="tac">
-  <el-col :span=24>
-    <h5>Default colors</h5>
-    <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      :router=true>
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item one</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">item three</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">item four</template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
+  <el-row class="tac">
+    <el-col :span="24">
+      <h5>Default colors</h5>
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        :router="true"
+      >
+        <el-submenu index="/orders">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>Orders</span>
+          </template>
+          <el-menu-item-group title="select orders">
+            <el-menu-item index="/orders/supplier">Supplier Orders</el-menu-item>
+            <el-menu-item index="/orders/customer">Customer Orders</el-menu-item>
+          </el-menu-item-group>
+          <!-- <el-menu-item-group title="Group Two">
+            <el-menu-item index="1-3">item three</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="1-4">
+            <template slot="title">item four</template>
+            <el-menu-item index="1-4-1">item one</el-menu-item>
+          </el-submenu> -->
         </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span>Navigator Two</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span>Navigator Three</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span>Navigator Four</span>
-      </el-menu-item>
-    </el-menu>
-  </el-col>
-</el-row>
+        <el-menu-item index="/profile">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>Profile</span>
+          </template>
+        </el-menu-item>
+        <el-menu-item index="3" disabled>
+          <i class="el-icon-document"></i>
+          <span>Navigator Three</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <span>Navigator Four</span>
+        </el-menu-item>
+      </el-menu>
+    </el-col>
+  </el-row>
 </template>
 
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class Button extends Vue {
-    handleOpen(key :Object, keyPath :Object) {
-      console.log(key, keyPath);
-    }
-    handleClose(key :Object, keyPath :Object) {
-      console.log(key, keyPath);
-    }
-    nav_11() {
-      console.log("ok");
-      this.$router.push('/nav/11')
-    }
+  handleOpen(key: Object, keyPath: Object) {
+    console.log(key, keyPath);
+  }
+  handleClose(key: Object, keyPath: Object) {
+    console.log(key, keyPath);
+  }
+  nav_11() {
+    console.log("ok");
+    this.$router.push("/nav/11");
+  }
 }
 </script>
