@@ -36,8 +36,16 @@ module.exports = (options = {}) => ({
       },
       {
         test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
+        // use: ['babel-loader'],
+        exclude: /node_modules/,
+	use: {
+	  loader: 'babel-loader',
+	  options: {
+            // presets: ['@babel/preset-env'],
+            presets: ["env"],
+            plugins: ["transform-es2015-shorthand-properties"]
+          }
+	}
       },
       {
         test: /\.css$/,
