@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'WaterFall'
 
-@app.route("/apis/login", methods=["GET", "POST"])
+@app.route("/apis/user/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         session['currentUser'] = "admin"
@@ -42,7 +42,7 @@ def login():
             })
 
 
-@app.route("/apis/signup", methods=["GET", "POST"])
+@app.route("/apis/user/register", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
         session['currentUser'] = "admin"
@@ -74,7 +74,7 @@ def signup():
             })
 
 
-@app.route('/apis/logout')
+@app.route('/apis/user/logout')
 def logout():
     session.clear()
     return json.dumps({
@@ -84,7 +84,7 @@ def logout():
         }
     })
 
-@app.route('/apis/checkuser/<username>')
+@app.route('/apis/user/checkuser/<username>')
 def checkuser(username):
     if request.method == 'GET':
         if username == 'yanbin':

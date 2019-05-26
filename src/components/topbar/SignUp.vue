@@ -20,7 +20,7 @@
       <el-select v-model="ruleForm.usertype" placeholder="not chose yet">
         <el-option
           v-for="item in usertypes"
-          :key="item.value"
+          :key="item.key"
           :label="item.label"
           :value="item.value"
         ></el-option>
@@ -52,9 +52,15 @@ export default class SignUp extends Vue {
     if (!value) {
       return callback(new Error("Please input user name"));
     }
+    const username = this.ruleForm.username;
+    for (let i = 0; i < username.length; ++i) {
+      if (!this.alphanum(username[i])) {
+        return callback(new Error("Username can only cantain a-z A-Z 0-9."));
+      }
+    }
     setTimeout(() => {
-      let username = this.ruleForm.username;
-      fetch(`/api/checkuser/${username}`)
+      // let username = this.ruleForm.username;
+      fetch(`/api/user/checkuser/${username}`)
         .then(res => {
           return res.json();
         })
@@ -67,6 +73,12 @@ export default class SignUp extends Vue {
         });
       // callback();
     }, 1000);
+  }
+  alphanum(ch: string) :boolean {
+    let code = ch.charCodeAt(0);
+    return (code >= "a".charCodeAt(0) && code <= 'z'.charCodeAt(0))
+      || (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0))
+      || (code >= '0'.charCodeAt(0) && code <= '9'.charCodeAt(0));
   }
   validatePass(rule: object, value: string, callback: Callback) {
     if (value === "") {
@@ -102,23 +114,32 @@ export default class SignUp extends Vue {
   };
   usertypes = [
     {
-      value: 0,
-      label: "微供应商"
+      key: 0,
+      value: "provider",
+      label: "provider"
     },
     {
-      value: 1,
-      label: "采购商"
+      key: 1,
+      value: "customer",
+      label: "customer"
+    },
+    {
+      key: 2,
+      value: "manager",
+      label: "manager"
     }
   ]
   submitForm(formName: string) {
     console.log(formName);
     (this.$refs[formName] as SignUpComponent).validate((valid: any) => {
       if (valid) {
-        fetch("/api/signup", {
+        fetch("/api/user/register", {
           method: "POST",
           body: JSON.stringify({
             username: this.ruleForm.username,
             password: this.ruleForm.pass,
+            email: 'yb@mail.cn', //TODO:
+            phone: '18988545832', //TODO:
             usertype: this.ruleForm.usertype
           })
         })

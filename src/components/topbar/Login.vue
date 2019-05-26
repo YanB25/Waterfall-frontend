@@ -64,7 +64,7 @@ export default class Login extends Vue {
       console.log(formName);
       (this.$refs[formName] as LoginComponent).validate((valid: any) => {
         if (valid) {
-          fetch('/api/login', {
+          fetch('/api/user/login', {
             method: 'POST',
             body: JSON.stringify({
               username: this.ruleForm.username,

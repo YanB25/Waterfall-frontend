@@ -49,7 +49,7 @@ export default class App extends Vue {
    this.m = "changed";
  }
  beforeCreated() {
-   fetch('/api/login', {
+   fetch('/api/user/login', {
      method: 'GET',
    }).then(res => {
      return res.json();

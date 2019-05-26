@@ -50,7 +50,7 @@ export default class Button extends Vue {
         console.log(key, keyPath);
     }
     logout(): void {
-        fetch("/api/logout")
+        fetch("/api/user/logout")
             .then(res => {
                 return res.json();
             })
