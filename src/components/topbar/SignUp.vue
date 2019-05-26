@@ -16,6 +16,13 @@
     <el-form-item label="Confirm" prop="checkPass">
       <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
     </el-form-item>
+    <el-form-item label="Email" prop="email">
+      <el-input v-model.number="ruleForm.email"></el-input>
+    </el-form-item>
+    <el-form-item label="Phone" prop="phone">
+      <el-input v-model="ruleForm.phone"></el-input>
+    </el-form-item>
+
     <el-form-item label="User Type">
       <el-select v-model="ruleForm.usertype" placeholder="not chose yet">
         <el-option
@@ -36,6 +43,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import validator from 'validator';
 
 interface Callback {
   (err?: Error): any;
@@ -53,10 +61,8 @@ export default class SignUp extends Vue {
       return callback(new Error("Please input user name"));
     }
     const username = this.ruleForm.username;
-    for (let i = 0; i < username.length; ++i) {
-      if (!this.alphanum(username[i])) {
-        return callback(new Error("Username can only cantain a-z A-Z 0-9."));
-      }
+    if (!validator.isAlphanumeric(username)){
+      return callback(new Error("Username can only cantain a-z A-Z 0-9."));
     }
     setTimeout(() => {
       // let username = this.ruleForm.username;
@@ -74,12 +80,19 @@ export default class SignUp extends Vue {
       // callback();
     }, 1000);
   }
-  alphanum(ch: string) :boolean {
-    let code = ch.charCodeAt(0);
-    return (code >= "a".charCodeAt(0) && code <= 'z'.charCodeAt(0))
-      || (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0))
-      || (code >= '0'.charCodeAt(0) && code <= '9'.charCodeAt(0));
+  checkPhone(rule: object, value: number, callback: Callback) {
+    if (!validator.isMobilePhone(this.ruleForm.phone, 'any')) {
+      return callback(new Error("please enter valid phone"));
+    }
+    callback();
   }
+  checkEmail(rule: object, value: number, callback: Callback) {
+    if (!validator.isEmail(this.ruleForm.email)) {
+      return callback(new Error("Please enter valid email"));
+    }
+    callback();
+  }
+
   validatePass(rule: object, value: string, callback: Callback) {
     if (value === "") {
       callback(new Error("Please input the password"));
@@ -106,11 +119,15 @@ export default class SignUp extends Vue {
     checkPass: "",
     username: "",
     usertype: "",
+    phone: "",
+    email: "",
   };
   rules = {
     pass: [{ validator: this.validatePass, trigger: "blur" }],
     checkPass: [{ validator: this.validatePass2, trigger: "blur" }],
-    username: [{ validator: this.checkUsername, trigger: "blur" }]
+    username: [{ validator: this.checkUsername, trigger: "blur" }],
+    phone: [{ validator: this.checkPhone, trigger: "blur" }],
+    email: [{ validator: this.checkEmail, trigger: "blur"}],
   };
   usertypes = [
     {
@@ -138,8 +155,8 @@ export default class SignUp extends Vue {
           body: JSON.stringify({
             username: this.ruleForm.username,
             password: this.ruleForm.pass,
-            email: 'yb@mail.cn', //TODO:
-            phone: '18988545832', //TODO:
+            email: this.ruleForm.email,
+            phone: this.ruleForm.phone,
             usertype: this.ruleForm.usertype
           })
         })

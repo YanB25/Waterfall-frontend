@@ -25,7 +25,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import validator from 'validator';
 
 interface Callback {
     (err?: Error): any
@@ -94,29 +95,15 @@ export default class Button extends Vue {
     }
 
     checkEmail(rule: Object, value : string, callback: Callback) {
-        let hasAt = false;
-        for (let i = 0; i < value.length; ++i) {
-            if (value[i] === '@') {
-                hasAt = true;
-            }
+        if (!validator.isEmail(value)) {
+            return callback(new Error('Plase enter valid email'));
         }
-        if (hasAt) {
-            callback();
-            this.emailValid = true;
-        } else {
-            callback(new Error("not a valid email"));
-            this.emailValid = false;
-        }
+        callback();
     }
     checkPhone(rule: Object, value : string, callback: Callback) {
-        for (let i = 0; i < value.length; ++i) {
-            if (value[i] < '0' || value[i] > '9') {
-                callback(new Error('invalid phone number'));
-                this.phoneValid = false;
-                return;
-            }
+        if (!validator.isMobilePhone(value, 'any')) {
+            callback(new Error('Plase enter valid phone number'));
         }
-        this.phoneValid = true;
         callback();
     }
     changed() {
