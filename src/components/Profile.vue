@@ -19,7 +19,7 @@
     <el-input type="text" v-model="form.status" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Submit </el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Update </el-button>
   </el-form-item>
 </el-form>
 </template>
