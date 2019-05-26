@@ -10,8 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "allowJs": true,
-    "module": "esnext",
-    "target": "es2015",
+    "module": "es2015",
+    "target": "es5",
     "moduleResolution": "node",
     "isolatedModules": true,
     "lib": [
