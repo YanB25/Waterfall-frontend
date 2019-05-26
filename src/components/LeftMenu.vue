@@ -15,8 +15,8 @@
             <span>Orders</span>
           </template>
           <el-menu-item-group title="select orders">
-            <el-menu-item index="/orders/supplier">Supplier Orders</el-menu-item>
-            <el-menu-item index="/orders/customer">Customer Orders</el-menu-item>
+            <el-menu-item index="/orders/main/">Main Orders</el-menu-item>
+            <el-menu-item index="/orders/sub/">Sub Orders</el-menu-item>
           </el-menu-item-group>
           <!-- <el-menu-item-group title="Group Two">
             <el-menu-item index="1-3">item three</el-menu-item>
