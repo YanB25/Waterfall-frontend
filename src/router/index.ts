@@ -6,16 +6,12 @@ import Profile from '@/components/Profile.vue'
 import MainOrder from '@/components/MainOrder.vue'
 import SubOrder from '@/components/SubOrder.vue'
 import MainOrderDetail from '@/components/MainOrderDetail.vue'
+import Welcome from '@/components/Welcome.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: Helloworld
-    },
     {
       path: '/profile',
       name: 'profile',
@@ -23,7 +19,7 @@ export default new Router({
     },
     {
       path: '/orders/main/:orderid',
-      name: 'Main Orders',
+      name: 'Main Orders Detail',
       component: MainOrderDetail
     },
     {
@@ -35,6 +31,16 @@ export default new Router({
       path: '/orders/sub/',
       name: 'Sub Orders',
       component: SubOrder
+    },
+    {
+      path: '/',
+      name: 'root',
+      component: Helloworld
+    },
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: Welcome
     }
   ]
 })

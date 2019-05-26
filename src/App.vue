@@ -26,12 +26,12 @@ import LeftMenu from '@/components/LeftMenu.vue'
 import Button from '@/components/Button.vue'
 import TopBar from '@/components/topbar/TopBar.vue'
 
-const routes = [
-  { path: '/button', component: Button }
-]
-const router = new VueRouter({
-  routes
-})
+// const routes = [
+//   { path: '/button', component: Button }
+// ]
+// const router = new VueRouter({
+//   routes
+// });
 
 @Component({
   components: {
@@ -56,16 +56,22 @@ export default class App extends Vue {
    }).then(data => {
      if (data.code === 0) {
        this.userid = data.data.userid;
+       sessionStorage.setItem('userid', this.userid.toString());
+     } else {
+       sessionStorage.clear();
      }
    })
  }
  login(username: string, userid: number) {
    this.username = username;
    this.userid = userid;
+   sessionStorage.setItem('userid', userid.toString());
+   this.$router.push('/welcome')
  }
  logout() {
    this.username = "";
    this.userid = -1;
+   sessionStorage.removeItem('userid')
  }
 }
 </script>

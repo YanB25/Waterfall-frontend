@@ -6,6 +6,19 @@ import router from './router'
 
 Vue.use(ElementUI)
 
+router.beforeEach((to, from, next) => {
+  console.log(`from ${from} to ${to}`)
+  if (to.path === '/') {
+    next()
+  } else {
+    if (sessionStorage.getItem('userid')) {
+      next()
+      return
+    }
+    next('/')
+  }
+})
+
 export default new Vue({
   el: '#app',
   router,
