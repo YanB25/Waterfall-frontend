@@ -34,11 +34,11 @@
         </el-menu-item>
         <el-menu-item index="3" disabled>
           <i class="el-icon-document"></i>
-          <span>Navigator Three</span>
+          <span>Manager</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/control-pane">
           <i class="el-icon-setting"></i>
-          <span>Navigator Four</span>
+          <span>Control Pane</span>
         </el-menu-item>
       </el-menu>
     </el-col>
