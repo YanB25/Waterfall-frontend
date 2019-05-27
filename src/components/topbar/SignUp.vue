@@ -157,7 +157,7 @@ export default class SignUp extends Vue {
             password: this.ruleForm.pass,
             email: this.ruleForm.email,
             phone: this.ruleForm.phone,
-            usertype: this.ruleForm.usertype
+            role: this.ruleForm.usertype
           })
         })
           .then(res => {
@@ -165,7 +165,7 @@ export default class SignUp extends Vue {
           })
           .then(data => {
             if (data.code === 0) {
-              this.$emit("login", data.data.username, data.data.userid);
+              this.$emit("login", this.ruleForm.username, data.data.userid);
             }
           })
           .catch(err => {

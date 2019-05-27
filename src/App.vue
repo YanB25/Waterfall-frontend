@@ -65,6 +65,7 @@ export default class App extends Vue {
  login(username: string, userid: number) {
    this.username = username;
    this.userid = userid;
+   console.log(username, userid);
    sessionStorage.setItem('userid', userid.toString());
    this.$router.push('/welcome')
  }

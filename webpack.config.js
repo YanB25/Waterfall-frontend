@@ -82,6 +82,7 @@ module.exports = (options = {}) => ({
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8099',
+        // target: 'https://waterfall.wwyf.top',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/apis'
