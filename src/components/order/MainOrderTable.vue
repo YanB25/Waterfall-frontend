@@ -80,6 +80,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Table } from 'element-ui';
 interface TableDataInterface {
   address: string,
   comment: string,
@@ -98,35 +99,11 @@ interface TableDataInterface {
 }
 @Component
 export default class Button extends Vue {
-  tableData = [{
-    "address": "Mega Center North",
-    "comments": "Very Quick!",
-    "createdate": "2018-01-08 12:00:00",
-    "createuser": 0,
-    "deadline": "2018-01-09 11:11:11",
-    "id": "1",
-    "name": "Shrimp",
-    "phone": "18900230024",
-    "price": 200,
-    "current_supply": 11,
-    "quantity": 3,
-    "status": 0,
-    "summary": "All I need is Shrimp",
-    "totalprice": 600,
-  }]
+  @Prop() tableData !: TableDataInterface[];
   click(index: number, row: TableDataInterface) {
     console.log(index);
     console.log(row);
     this.$router.push(`/orders/main/${row.id}`)
-  }
-  beforeCreate() {
-    fetch('/api/order/mainOrder?limit=10', {
-      method: 'GET'
-    }).then(data => {
-      return data.json();
-    }).then(res => {
-      this.tableData = res.data.orders;
-    })
   }
 }
 </script>

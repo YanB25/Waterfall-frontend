@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import Helloworld from '@/components/Helloworld.vue'
 // import Button from '@/components/Button.vue'
 import Profile from '@/components/Profile.vue'
-import MainOrder from '@/components/MainOrder.vue'
-import SubOrder from '@/components/SubOrder.vue'
-import MainOrderDetail from '@/components/MainOrderDetail.vue'
+import MainOrder from '@/components/order/MainOrder.vue'
+import SubOrder from '@/components/order/SubOrder.vue'
+import MainOrderDetail from '@/components/order/MainOrderDetail.vue'
 import Welcome from '@/components/Welcome.vue'
 
 Vue.use(Router)

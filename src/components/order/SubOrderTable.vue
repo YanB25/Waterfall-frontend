@@ -38,7 +38,7 @@
     </el-table-column>
     <el-table-column
       label="Main Order Id"
-      prop="mainOrderId">
+      prop="mainorder">
     </el-table-column>
     <el-table-column
       label="Create User ID"
@@ -57,7 +57,7 @@ interface TableDataInterface {
   createdate: string,
   createuser: number,
   id: string,
-  mainOrderId: string,
+  mainorder: string,
   phone: string,
   quantity: number,
   status: number,

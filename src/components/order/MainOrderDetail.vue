@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import SubOrderTable from '@/components/SubOrderTable.vue'
+import SubOrderTable from '@/components/order/SubOrderTable.vue'
 import { Dictionary } from 'vue-router/types/router';
 @Component({
     components: {
         SubOrderTable
     }
-})
+}) 
 export default class Button extends Vue {
     back() {
         this.$router.push('/orders/main');
@@ -30,9 +30,6 @@ export default class Button extends Vue {
             .then(res => res.json())
             .then(res => {
                 this.subOrdersList = res.data;
-                for (let i = 0; i < this.subOrdersList.length; ++i) {
-                    this.subOrdersList[i]['mainOrderId'] = this.$route.params.orderid;
-                }
             })
     }
 }

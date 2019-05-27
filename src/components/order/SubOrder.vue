@@ -4,7 +4,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import SubOrderTable from '@/components/SubOrderTable.vue'
+import SubOrderTable from '@/components/order/SubOrderTable.vue'
 
 interface TableDataInterface {
   comments: string,
@@ -22,16 +22,7 @@ interface TableDataInterface {
   }
 })
 export default class Button extends Vue {
-  tableData = [{
-    "comments": "string",
-    "createdate": "2018-01-02 11:11:11",
-    "createuser": 0,
-    "id": "string",
-    "mainOrderId": "string",
-    "phone": "string",
-    "quantity": 3,
-    "status": 0
-  }]
+  tableData = []
   // click(index: number, row: TableDataInterface) {
   //   console.log(index);
   //   console.log(row);
