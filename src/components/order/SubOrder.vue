@@ -29,7 +29,7 @@ export default class Button extends Vue {
   //   this.$router.push(`/orders/sub/${row.id}`)
   // }
   beforeCreate() {
-    fetch('/api/order/subOrder?limit=10', {
+    fetch('/api/order/subOrder?limit=-1', {
       method: 'GET'
     }).then(data => {
       return data.json();

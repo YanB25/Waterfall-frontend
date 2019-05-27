@@ -33,18 +33,22 @@
       </template>
     </el-table-column>
     <el-table-column
+      sortable
       label="ID"
       prop="id">
     </el-table-column>
     <el-table-column
+      sortable
       label="Main Order Id"
       prop="mainorder">
     </el-table-column>
     <el-table-column
+      sortable
       label="Create User ID"
       prop="createuser">
     </el-table-column>
     <el-table-column
+      sortable
       label="Quantity"
       prop="quantity">
     </el-table-column>

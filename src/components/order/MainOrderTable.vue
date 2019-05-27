@@ -52,18 +52,22 @@
       </template>
     </el-table-column>
     <el-table-column
+      sortable
       label="ID"
       prop="id">
     </el-table-column>
     <el-table-column
+      sortable
       label="Name"
       prop="name">
     </el-table-column>
     <el-table-column
+      sortable
       label="Create User ID"
       prop="createuser">
     </el-table-column>
     <el-table-column
+      sortable
       label="Price"
       prop="price">
     </el-table-column>
