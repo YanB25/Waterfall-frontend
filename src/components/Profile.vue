@@ -19,7 +19,7 @@
     <el-input type="text" v-model="form.status" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Update </el-button>
+    <el-button type="primary" @click="onSubmit('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Update </el-button>
   </el-form-item>
 </el-form>
 </template>
@@ -63,8 +63,16 @@ export default class Button extends Vue {
     onSubmit(formName: string) {
         (this.$refs[formName] as LoginComponent).validate((valid: any) => {
             if (valid) {
+                fetch(`/api/user/${this.userid}`, {
+                    method: "POST",
+                    body: JSON.stringify(this.form)
+                })
+                //TODO:
                 alert('submit!');
+                this.hasChanged = false;
             } else {
+                console.log('valida err');
+                alert("validation err");
                 return false;
             }
         });
