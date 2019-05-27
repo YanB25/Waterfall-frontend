@@ -119,6 +119,15 @@ export default class Button extends Vue {
     console.log(row);
     this.$router.push(`/orders/main/${row.id}`)
   }
+  beforeCreate() {
+    fetch('/api/order/mainOrder?limit=10', {
+      method: 'GET'
+    }).then(data => {
+      return data.json();
+    }).then(res => {
+      this.tableData = res.data.orders;
+    })
+  }
 }
 </script>
 

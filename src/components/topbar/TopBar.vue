@@ -57,7 +57,9 @@ export default class Button extends Vue {
             .then(data => {
                 if (data.code === 0) {
                     this.hasLogin = false;
-                    this.$emit('logout');
+                    sessionStorage.clear();
+                    this.username = '';
+                    this.userid = -1;
                 }
             })
     }
@@ -65,9 +67,18 @@ export default class Button extends Vue {
         this.hasLogin = true;
         this.username = username;
         this.userid = userid;
+        sessionStorage.setItem('userid', userid.toString());
+        sessionStorage.setItem('username', username);
         console.log(username);
         console.log(userid);
-        this.$emit('login', username, userid);
+    }
+    beforeMount() {
+        if (sessionStorage.getItem('userid')) {
+            console.log('has login!!!')
+            this.hasLogin = true;
+            this.username = sessionStorage.getItem('username') as string;
+            this.userid = parseFloat(sessionStorage.getItem('userid') as string);
+        }
     }
 }
 </script>

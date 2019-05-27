@@ -140,11 +140,11 @@ export default class SignUp extends Vue {
       value: "customer",
       label: "customer"
     },
-    {
-      key: 2,
-      value: "manager",
-      label: "manager"
-    }
+    // {
+    //   key: 2,
+    //   value: "manager",
+    //   label: "manager"
+    // }
   ]
   submitForm(formName: string) {
     console.log(formName);

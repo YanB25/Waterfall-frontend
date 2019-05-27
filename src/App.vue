@@ -2,7 +2,7 @@
   <div id="app">
 
     <el-row>
-      <TopBar @login="login" @logout="logout"/>
+      <TopBar/>
     </el-row>
     <el-col :span=4>
 
@@ -12,7 +12,7 @@
     <!-- <img src="./assets/logo.png">
     <Button :msg="m" @click.native="hei"> </Button> -->
     <el-col :span=16 :offset=2>
-      <router-view class="main" :userid="userid" :username="username"/>
+      <router-view class="main"/>
     </el-col>
   </div>
 </template>
@@ -42,38 +42,35 @@ import TopBar from '@/components/topbar/TopBar.vue'
 })
 export default class App extends Vue {
   m = "hello";
-  userid: number = -1;
-  username: string = "";
+  // userid: number = -1;
+  // username: string = "";
 
   hei() :void {
    this.m = "changed";
  }
- beforeCreated() {
-   fetch('/api/user/login', {
-     method: 'GET',
-   }).then(res => {
-     return res.json();
-   }).then(data => {
-     if (data.code === 0) {
-       this.userid = data.data.userid;
-       sessionStorage.setItem('userid', this.userid.toString());
-     } else {
-       sessionStorage.clear();
-     }
-   })
- }
- login(username: string, userid: number) {
-   this.username = username;
-   this.userid = userid;
-   console.log(username, userid);
-   sessionStorage.setItem('userid', userid.toString());
-   this.$router.push('/welcome')
- }
- logout() {
-   this.username = "";
-   this.userid = -1;
-   sessionStorage.removeItem('userid')
- }
+//  beforeCreate() {
+//    fetch('/api/user/login', {
+//      method: 'GET',
+//    }).then(res => {
+//      return res.json();
+//    }).then(data => {
+//      if (data.code === 0) {
+//        this.userid = data.data.userid;
+//        sessionStorage.setItem('userid', this.userid.toString());
+//        fetch(`/api/user/${this.userid}`)
+//         .then(res => {
+//           return res.json();
+//         })
+//         .then(res => {
+//           this.username = res.data.username;
+//         })
+//      } else {
+//        sessionStorage.clear();
+//        this.userid = -1;
+//        this.username = '';
+//      }
+//    })
+//  }
 }
 </script>
 

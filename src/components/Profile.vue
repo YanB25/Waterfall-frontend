@@ -10,7 +10,7 @@
     <el-input type="text" v-model="form.phone" autocomplete="off" @change="changed"></el-input>
   </el-form-item>
   <el-form-item label="balance" prop="balance" >
-    <el-input type="text" v-model="form.balance" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
   <el-form-item label="role" prop="role" >
     <el-input type="text" v-model="form.role" autocomplete="off" :disabled="true"></el-input>
@@ -39,8 +39,8 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Button extends Vue {
-    @Prop(Number) userid?: Number;
-    @Prop(String) username?: String;
+    userid: number = -1;
+    username: string = '';
     hasChanged: Boolean = false;
     emailValid: Boolean = true;
     phoneValid: Boolean = true;
@@ -48,7 +48,7 @@ export default class Button extends Vue {
     form = {
         email: '',
         phone: '',
-        balance: 0,
+        balance: '',
         role: '',
         status: 0,
     };
@@ -80,26 +80,27 @@ export default class Button extends Vue {
 
     beforeMount() {
         console.log('mount');
-        if (this.userid == -1) {
-            this.$router.push('/');
-        } else {
-            fetch(`/api/user/${this.userid}`, {
-                method: 'GET',
-            }).then(res => {
-                return res.json();
-            }).then(data => {
-                if (data.code === 0) {
-                    console.log(data.data);
-                    this.form.email = data.data.email;
-                    this.form.phone = data.data.phone;
-                    this.form.balance = data.data.balance;
-                    this.form.role = data.data.role;
-                    this.form.status = data.data.status;
-                } else {
-                    alert(`err: ${data.msg}`)
-                }
-            })
+        if (sessionStorage.getItem('userid')) {
+            this.userid = parseFloat(sessionStorage.getItem('userid') as string);
+            this.username = sessionStorage.getItem('username') as string;
         }
+        fetch(`/api/user/${this.userid}`, {
+            method: 'GET',
+        }).then(res => {
+            return res.json();
+        }).then(data => {
+            if (data.code === 0) {
+                console.log(data.data);
+                this.form.email = data.data.email;
+                this.form.phone = data.data.phone;
+                this.form.balance = (data.data.balance as number).toString();
+                this.form.role = data.data.role;
+                this.form.status = data.data.status;
+                console.log(this.form.balance);
+            } else {
+                alert(`err: ${data.msg}`)
+            }
+        });
     }
 
     checkEmail(rule: Object, value : string, callback: Callback) {
