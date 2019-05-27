@@ -73,11 +73,13 @@ export default class Button extends Vue {
         console.log(userid);
     }
     beforeMount() {
-        if (sessionStorage.getItem('userid')) {
+        if (sessionStorage.getItem('userid') && sessionStorage.getItem('username')) {
             console.log('has login!!!')
             this.hasLogin = true;
             this.username = sessionStorage.getItem('username') as string;
             this.userid = parseFloat(sessionStorage.getItem('userid') as string);
+        } else {
+            this.hasLogin = false;
         }
     }
 }

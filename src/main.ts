@@ -11,7 +11,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/') {
     next()
   } else {
-    if (sessionStorage.getItem('userid')) {
+    if (sessionStorage.getItem('userid') && sessionStorage.getItem('username')) {
       next()
       return
     }

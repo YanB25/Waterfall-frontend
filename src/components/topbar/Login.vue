@@ -6,15 +6,16 @@
     ref="ruleForm"
     label-width="120px"
     class="demo-ruleForm"
+    @keyup.enter="submitForm('fuleForm')"
   >
     <el-form-item label="User Name" prop="username">
       <el-input v-model.number="ruleForm.username"></el-input>
     </el-form-item>
     <el-form-item label="Password" prop="pass">
-      <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" @keyup.enter="submitForm('fuleForm')"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+      <el-button type="primary" @click="submitForm('ruleForm')" >Submit</el-button>
       <el-button @click="resetForm('ruleForm')">Reset</el-button>
     </el-form-item>
   </el-form>

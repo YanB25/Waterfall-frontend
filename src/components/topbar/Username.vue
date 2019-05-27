@@ -16,7 +16,11 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class SignUp extends Vue {
-    @Prop(String) username?: string;
+  username: string = '';
+    beforeMount() {
+      console.log('username mount')
+      this.username = sessionStorage.getItem('username') as string;
+    }
     logout(): void {
       this.$emit('logout');
     }
