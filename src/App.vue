@@ -42,35 +42,10 @@ import TopBar from '@/components/topbar/TopBar.vue'
 })
 export default class App extends Vue {
   m = "hello";
-  // userid: number = -1;
-  // username: string = "";
-
+  
   hei() :void {
    this.m = "changed";
  }
-//  beforeCreate() {
-//    fetch('/api/user/login', {
-//      method: 'GET',
-//    }).then(res => {
-//      return res.json();
-//    }).then(data => {
-//      if (data.code === 0) {
-//        this.userid = data.data.userid;
-//        sessionStorage.setItem('userid', this.userid.toString());
-//        fetch(`/api/user/${this.userid}`)
-//         .then(res => {
-//           return res.json();
-//         })
-//         .then(res => {
-//           this.username = res.data.username;
-//         })
-//      } else {
-//        sessionStorage.clear();
-//        this.userid = -1;
-//        this.username = '';
-//      }
-//    })
-//  }
 }
 </script>
 

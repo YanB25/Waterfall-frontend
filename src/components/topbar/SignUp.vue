@@ -165,7 +165,7 @@ export default class SignUp extends Vue {
           })
           .then(data => {
             if (data.code === 0) {
-              this.$emit("login", this.ruleForm.username, data.data.userid);
+              this.$emit("login", this.ruleForm.username, data.data.userid, this.ruleForm.usertype);
             }
           })
           .catch(err => {

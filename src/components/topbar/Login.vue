@@ -77,7 +77,10 @@ export default class Login extends Vue {
           })
           .then(data => {
             if (data.code === 0) {
-              this.$emit('login', this.ruleForm.username, data.data.userid);
+              fetch(`/api/user/${data.data.userid}`).then(res => res.json())
+                .then(res => {
+                  this.$emit('login', this.ruleForm.username, res.data.id, res.data.role);
+                })
             } else {
               alert(`err to login: ${data.data.msg}`);
             }

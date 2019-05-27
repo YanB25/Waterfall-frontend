@@ -8,10 +8,14 @@ Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
   console.log(`from ${from} to ${to}`)
-  if (to.path === '/') {
+  let hasLogin :boolean = sessionStorage.getItem('userid') !== null && sessionStorage.getItem('username') != null;
+  if (!hasLogin && to.path === '/') {
     next()
-  } else {
-    if (sessionStorage.getItem('userid') && sessionStorage.getItem('username')) {
+  } if (hasLogin && to.path === '/welcome') {
+    next()
+  }
+  else {
+    if (hasLogin) {
       next()
       return
     }

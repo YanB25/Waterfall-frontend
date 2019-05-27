@@ -63,14 +63,16 @@ export default class Button extends Vue {
                 }
             })
     }
-    login(username: string, userid: number): void {
+    login(username: string, userid: number, role: string): void {
         this.hasLogin = true;
         this.username = username;
         this.userid = userid;
         sessionStorage.setItem('userid', userid.toString());
         sessionStorage.setItem('username', username);
+        sessionStorage.setItem('role', role);
         console.log(username);
         console.log(userid);
+        this.$router.push('/welcome');
     }
     beforeMount() {
         if (sessionStorage.getItem('userid') && sessionStorage.getItem('username')) {
