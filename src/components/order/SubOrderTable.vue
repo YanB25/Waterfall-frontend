@@ -54,9 +54,11 @@
     </el-table-column>
     <el-table-column label="Operation" v-if="isme || role == 'manager'">
       <template slot-scope="scope">
-        <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
-         @click="deleteOrder(scope.$index, scope.row)">
-        </el-button>
+        <el-tooltip content="删除订单" placement="bottom" :enterable=false>
+          <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
+          @click="deleteOrder(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
       </template>
     </el-table-column>
   </el-table>

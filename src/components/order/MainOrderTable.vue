@@ -93,16 +93,22 @@
       </template>
     </el-table-column>
     <el-table-column label="Operation">
-      <template slot-scope="scope"> 
-        <el-button icon="el-icon-search" circle
-        @click="info(scope.$index, scope.row)"></el-button>
-        <el-button type="primary" icon="el-icon-edit" circle v-if="role == 'provider'"
-          :disabled="scope.row.remain_quantity == 0"
-         @click="provide(scope.$index, scope.row)">
-        </el-button>
-        <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
-         @click="deleteOrder(scope.$index, scope.row)">
-        </el-button>
+      <template slot-scope="scope">
+        <el-tooltip content="查看详情" placement="bottom" :enterable=false>
+          <el-button icon="el-icon-search" circle
+          @click="info(scope.$index, scope.row)"></el-button>
+        </el-tooltip>
+        <el-tooltip content="发起子订单" placement="bottom" :enterable=false>
+          <el-button type="primary" icon="el-icon-edit" circle v-if="role == 'provider'"
+            :disabled="scope.row.remain_quantity == 0"
+          @click="provide(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
+        <el-tooltip content="删除订单" placement="bottom" :enterable=false>
+          <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
+          @click="deleteOrder(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
       </template>
     </el-table-column>
   </el-table>
