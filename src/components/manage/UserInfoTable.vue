@@ -54,6 +54,14 @@
       sortable
       label="用户状态"
       prop="status">
+      <template slot-scope="scope">
+        <el-switch
+        :value="!scope.row.status"
+        active-text="已激活"
+        inactive-text="未激活"
+        @change="changeUserStatus(scope.$index, scope.row)">
+        </el-switch>
+      </template>
     </el-table-column>
     <el-table-column label="操作" >
       <template slot-scope="scope">
@@ -84,6 +92,33 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  changeUserStatus(index: number, row: TableDataInterface) {
+    fetch(`/api/user/${row.id}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        status: 1 - row.status,
+      })
+    }).then(res => res.json())
+    .then(res => {
+      if (res.code === 0) {
+        this.$message({
+          message: `成功修改用户 ${row.username}`,
+          type: "success"
+        })
+        this.tableData[index].status = 1 - row.status;
+      } else {
+        this.$message({
+          message: `err: ${res.msg}`,
+          type: "error"
+        })
+      }
+    }).catch(err => {
+      this.$message({
+        message: `err: ${err}`,
+        type: "error"
+      })
+    })
+  }
   deleteUser(index: number, row: object) {
     //TODO:
     this.$message({
