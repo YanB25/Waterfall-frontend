@@ -81,13 +81,23 @@ export default class Login extends Vue {
                 .then(res => {
                   console.log(`debug: emit ${data.data.userid}, ${res.data.role}`)
                   this.$emit('login', this.ruleForm.username, data.data.userid, res.data.role);
+                  this.$message({
+                    message: 'Login success!',
+                    type: 'success'
+                  });
                 })
             } else {
-              alert(`err to login: ${data.data.msg}`);
+              this.$message({
+                message: `err to login: ${data.data.msg}`,
+                type: 'error'
+              })
             }
           })
           .catch(err => {
-            console.log(err);
+            this.$message({
+              message: `err: ${err}`,
+              type: 'error'
+            });
           })
           return true;
         } else {

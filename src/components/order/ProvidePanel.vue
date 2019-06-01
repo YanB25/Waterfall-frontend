@@ -92,9 +92,15 @@ export default class Login extends Vue {
             }).then(res => res.json())
             .then(res => {
                 if (res.code === 0) {
-                    alert('ok');
+                    this.$message({
+                        message: "success",
+                        type: "error"
+                    })
                 } else {
-                    alert(`err: res.msg`);
+                    this.$message({
+                        message: `err: ${res.msg}`,
+                        type: "error"
+                    })
                 }
             })
         } else {
