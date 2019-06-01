@@ -24,7 +24,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import SubOrderTable from './order/SubOrderTable.vue'
 import MainOrderTable from './order/MainOrderTable.vue'
-import PlaceMainOrder from './PlaceMainOrder.vue'
+import PlaceMainOrder from './order/PlaceMainOrder.vue'
 @Component({
     components: {
         SubOrderTable,
