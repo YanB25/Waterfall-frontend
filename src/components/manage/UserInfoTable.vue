@@ -55,7 +55,7 @@
       label="用户状态"
       prop="status">
     </el-table-column>
-    <el-table-column label="操作" >
+    <el-table-column label="操作" :width="200">
       <template slot-scope="scope">
         <el-button icon="el-icon-search" circle
         @click="info(scope.$index, scope.row)"></el-button>
