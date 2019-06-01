@@ -22,7 +22,8 @@ import { Dictionary } from 'vue-router/types/router';
 }) 
 export default class Button extends Vue {
     back() {
-        this.$router.push('/orders/main');
+        // this.$router.push('/orders/main');
+        this.$router.go(-1);
     }
     subOrdersList :Dictionary<string>[] = [];
     beforeMount() {

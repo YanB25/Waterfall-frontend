@@ -1,7 +1,8 @@
 <template>
   <el-table
     :data="tableData"
-    style="width: 100%">
+    style="width: 100%"
+    class="main">
     <el-table-column type="expand">
       <template slot-scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
@@ -39,6 +40,9 @@
           <el-form-item label="Quantity">
             <span>{{ props.row.quantity }}</span>
           </el-form-item>
+          <el-form-item label="Remain Quantity">
+            <span>{{ props.row.remain_quantity }}</span>
+          </el-form-item>
           <el-form-item label="Status">
             <span>{{ props.row.status }}</span>
           </el-form-item>
@@ -71,6 +75,11 @@
       label="Price"
       prop="price">
     </el-table-column>
+    <el-table-column
+      sortable
+      label="Rem Quantity"
+      prop="remain_quantity">
+    </el-table-column>
     <el-table-column label="Operation">
       <template slot-scope="scope">
         <el-button type="primary"
@@ -97,6 +106,7 @@ interface TableDataInterface {
   price: number,
   current_supply: number,
   quantity: number,
+  remain_quantity: number,
   status: number,
   summary: string,
   totalprice: number,
@@ -113,6 +123,9 @@ export default class Button extends Vue {
 </script>
 
 <style>
+  .main {
+    margin-bottom: 100px;
+  }
   .demo-table-expand {
     font-size: 0;
   }

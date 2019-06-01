@@ -19,12 +19,6 @@
 </div>
 </template>
 
-<style>
-.atbottom {
-    margin-bottom: 200px;
-}
-</style>
-
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
