@@ -53,7 +53,8 @@
     <el-table-column
       sortable
       label="用户状态"
-      prop="status">
+      prop="status"
+      :width="200">
       <template slot-scope="scope">
         <el-switch
         :value="!scope.row.status"
