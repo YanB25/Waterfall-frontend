@@ -60,6 +60,7 @@ export default class Button extends Vue {
                     sessionStorage.clear();
                     this.username = '';
                     this.userid = -1;
+                    this.$emit('logout');
                 }
             })
     }
@@ -74,6 +75,7 @@ export default class Button extends Vue {
         console.log(userid);
         // console.log(`user id to string: ${userid.toString()}`)
         this.$router.push('/welcome');
+        this.$emit('login');
     }
     beforeMount() {
         if (sessionStorage.getItem('userid') && sessionStorage.getItem('username')) {

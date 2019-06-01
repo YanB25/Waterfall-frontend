@@ -9,6 +9,7 @@ import MainOrderDetail from '@/components/order/MainOrderDetail.vue'
 import Welcome from '@/components/Welcome.vue'
 import ControlPanel from '@/components/ControlPanel.vue'
 import ProvidePanel from '@/components/order/ProvidePanel.vue'
+import UserManage from '@/components/manage/UserManage.vue'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/control-panel',
       name: 'control panel',
       component: ControlPanel
+    },
+    {
+      path: '/manage/user',
+      name: 'user manage panel',
+      component: UserManage
     }
   ]
 })

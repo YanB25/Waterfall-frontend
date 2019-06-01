@@ -2,11 +2,11 @@
   <div id="app">
 
     <el-row>
-      <TopBar/>
+      <TopBar @login='login' @logout='logout'/>
     </el-row>
     <el-col :span=4>
 
-      <LeftMenu />
+      <LeftMenu ref="leftMenu"/>
     </el-col>
 
     <!-- <img src="./assets/logo.png">
@@ -42,10 +42,17 @@ import TopBar from '@/components/topbar/TopBar.vue'
 })
 export default class App extends Vue {
   m = "hello";
-  
+  hasLogin: boolean = false;
   hei() :void {
    this.m = "changed";
  }
+ login() {
+   (this.$refs.leftMenu as any).refreshUserRole();
+ }
+ logout() {
+   (this.$refs.leftMenu as any).refreshUserRole();
+ }
+
 }
 </script>
 
