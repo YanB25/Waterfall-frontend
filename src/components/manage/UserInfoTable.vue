@@ -72,7 +72,7 @@
         </el-tooltip> -->
           <el-tooltip content="编辑用户资料" placement="bottom" :enterable=false>
           <el-button type="primary" icon="el-icon-edit" circle
-          @click="provide(scope.$index, scope.row)">
+          @click="info(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
         <el-tooltip content="删除用户" placement="bottom" :enterable=false>

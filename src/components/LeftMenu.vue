@@ -58,7 +58,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class Button extends Vue {
   role : string = "guest";
-  profilePath: string = `/profile/${sessionStorage.getItem('userid')}`;
+  profilePath: string = '';
 
   handleOpen(key: Object, keyPath: Object) {
     console.log(key, keyPath);
@@ -81,6 +81,7 @@ export default class Button extends Vue {
   }
   beforeMount() {
     this.refreshUserRole();
+    this.profilePath = `/profile/${sessionStorage.getItem('userid')}`;
   }
 }
 </script>
