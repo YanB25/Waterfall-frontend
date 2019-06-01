@@ -1,7 +1,7 @@
 <template>
   <el-form :model="form" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" v-loading="isloading">
   <el-form-item label="username" prop="username">
-    <el-input type="text" v-model="this.username" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model="this.form.username" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
   <el-form-item label="email" prop="email" >
     <el-input type="text" v-model="form.email" autocomplete="off" @change="changed"></el-input>
@@ -10,16 +10,26 @@
     <el-input type="text" v-model="form.phone" autocomplete="off" @change="changed"></el-input>
   </el-form-item>
   <el-form-item label="balance" prop="balance" >
-    <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
-  <el-form-item label="role" prop="role" >
-    <el-input type="text" v-model="form.role" autocomplete="off" :disabled="true"></el-input>
+  <el-form-item label="role" prop="role" v-if="role != 'manager'">
+    <el-input type="text" v-model="form.role" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
+<el-form-item label="User Type" prop="role" v-if="role == 'manager'">
+    <el-select v-model="form.role">
+    <el-option
+        v-for="item in usertypes"
+        :key="item.key"
+        :label="item.label"
+        :value="item.value"
+    ></el-option>
+    </el-select>
+</el-form-item>
   <el-form-item label="status" prop="status" >
-    <el-input type="text" v-model="form.status" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model="form.status" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Update </el-button>
+    <el-button type="primary" @click="onSubmit('ruleForm')" :disabled="!role == 'manager' &&(!hasChanged || !emailValid || !phoneValid)"> Update </el-button>
   </el-form-item>
 </el-form>
 </template>
@@ -39,6 +49,7 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Button extends Vue {
+    role: string = '';
     isloading: boolean = true;
 
     userid: number = -1;
@@ -52,7 +63,8 @@ export default class Button extends Vue {
         phone: '',
         balance: '',
         role: '',
-        status: 0,
+        status: '',
+        username: '',
     };
     rules = {
         email: [
@@ -62,6 +74,23 @@ export default class Button extends Vue {
             { validator: this.checkPhone, trigger: 'blur' }
         ]
     }
+    usertypes = [
+        {
+        key: 0,
+        value: "provider",
+        label: "provider"
+        },
+        {
+        key: 1,
+        value: "customer",
+        label: "customer"
+        },
+        {
+          key: 2,
+          value: "manager",
+          label: "manager"
+        }
+    ]
     onSubmit(formName: string) {
         (this.$refs[formName] as LoginComponent).validate((valid: any) => {
             if (valid) {
@@ -95,11 +124,12 @@ export default class Button extends Vue {
 
     beforeMount() {
         console.log('mount');
+        this.role = sessionStorage.getItem('role') as string;
         if (sessionStorage.getItem('userid')) {
             this.userid = parseFloat(sessionStorage.getItem('userid') as string);
             this.username = sessionStorage.getItem('username') as string;
         }
-        fetch(`/api/user/${this.userid}`, {
+        fetch(`/api/user/${this.$route.params.userid}`, {
             method: 'GET',
         }).then(res => {
             return res.json();
@@ -110,7 +140,8 @@ export default class Button extends Vue {
                 this.form.phone = data.data.phone;
                 this.form.balance = (data.data.balance as number).toString();
                 this.form.role = data.data.role;
-                this.form.status = data.data.status;
+                this.form.status = (data.data.status as number).toString();
+                this.form.username = data.data.username;
                 console.log(this.form.balance);
             } else {
                 this.$message({

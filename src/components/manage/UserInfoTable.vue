@@ -53,7 +53,8 @@
     <el-table-column
       sortable
       label="用户状态"
-      prop="status">
+      prop="status"
+      :width="200">
       <template slot-scope="scope">
         <el-switch
         :value="!scope.row.status"
@@ -63,12 +64,12 @@
         </el-switch>
       </template>
     </el-table-column>
-    <el-table-column label="操作" >
+    <el-table-column label="操作" :width="200">
       <template slot-scope="scope">
-          <el-tooltip content="查看详情" placement="bottom" :enterable=false>
+          <!-- <el-tooltip content="查看详情" placement="bottom" :enterable=false>
           <el-button icon="el-icon-search" circle
           @click="info(scope.$index, scope.row)"></el-button>
-        </el-tooltip>
+        </el-tooltip> -->
           <el-tooltip content="编辑用户资料" placement="bottom" :enterable=false>
           <el-button type="primary" icon="el-icon-edit" circle
           @click="provide(scope.$index, scope.row)">
@@ -131,6 +132,9 @@ export default class Button extends Vue {
       message: "not implemented",
       type: "error"
     })
+  }
+  info(index: number, row: TableDataInterface) {
+    this.$router.push(`/profile/${row.id}`)
   }
   
 }

@@ -26,7 +26,7 @@
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-submenu> -->
         </el-submenu>
-        <el-menu-item index="/profile">
+        <el-menu-item :index="profilePath">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>Profile</span>
@@ -58,6 +58,8 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class Button extends Vue {
   role : string = "guest";
+  profilePath: string = `/profile/${sessionStorage.getItem('userid')}`;
+
   handleOpen(key: Object, keyPath: Object) {
     console.log(key, keyPath);
   }
