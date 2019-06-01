@@ -16,7 +16,7 @@
     <el-input type="text" v-model="form.role" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
 <el-form-item label="User Type" prop="role" v-if="role == 'manager'">
-    <el-select v-model="form.role">
+    <el-select v-model="form.role" :disabled="true">
     <el-option
         v-for="item in usertypes"
         :key="item.key"
