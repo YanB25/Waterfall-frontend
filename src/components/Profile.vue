@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-form :model="form" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" v-loading="isloading">
   <el-form-item label="username" prop="username">
     <el-input type="text" v-model="this.username" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
@@ -39,6 +39,8 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Button extends Vue {
+    isloading: boolean = true;
+
     userid: number = -1;
     username: string = '';
     hasChanged: Boolean = false;
@@ -116,7 +118,14 @@ export default class Button extends Vue {
                     type: "error"
                 });
             }
-        });
+        }).catch(err => {
+            this.$message({
+                message: `err`,
+                type: "error"
+            })
+        }).finally(() => {
+            this.isloading = false;
+        })
     }
 
     checkEmail(rule: Object, value : string, callback: Callback) {
