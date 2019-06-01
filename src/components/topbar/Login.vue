@@ -6,13 +6,13 @@
     ref="ruleForm"
     label-width="120px"
     class="demo-ruleForm"
-    @keyup.enter="submitForm('fuleForm')"
+    @keydown.enter="submitForm('ruleForm')"
   >
     <el-form-item label="User Name" prop="username">
-      <el-input v-model.number="ruleForm.username"></el-input>
+      <el-input v-model.number="ruleForm.username" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Password" prop="pass">
-      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" @keyup.enter="submitForm('fuleForm')"></el-input>
+      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')" >Submit</el-button>

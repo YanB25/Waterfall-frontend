@@ -8,19 +8,19 @@
     class="demo-ruleForm"
   >
     <el-form-item label="User Name" prop="username">
-      <el-input v-model.number="ruleForm.username"></el-input>
+      <el-input v-model.number="ruleForm.username" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Password" prop="pass">
-      <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Confirm" prop="checkPass">
-      <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Email" prop="email">
-      <el-input v-model.number="ruleForm.email"></el-input>
+      <el-input v-model.number="ruleForm.email" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Phone" prop="phone">
-      <el-input v-model="ruleForm.phone"></el-input>
+      <el-input v-model="ruleForm.phone" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
 
     <el-form-item label="User Type">
