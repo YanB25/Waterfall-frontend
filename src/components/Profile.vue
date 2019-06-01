@@ -10,13 +10,13 @@
     <el-input type="text" v-model="form.phone" autocomplete="off" @change="changed"></el-input>
   </el-form-item>
   <el-form-item label="balance" prop="balance" >
-    <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
   <el-form-item label="role" prop="role" >
-    <el-input type="text" v-model="form.role" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model="form.role" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
   <el-form-item label="status" prop="status" >
-    <el-input type="text" v-model="form.status" autocomplete="off" :disabled="true"></el-input>
+    <el-input type="text" v-model="form.status" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="onSubmit('ruleForm')" :disabled="!hasChanged || !emailValid || !phoneValid"> Update </el-button>
@@ -39,6 +39,7 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Button extends Vue {
+    role: string = '';
     isloading: boolean = true;
 
     userid: number = -1;
@@ -52,7 +53,7 @@ export default class Button extends Vue {
         phone: '',
         balance: '',
         role: '',
-        status: 0,
+        status: '',
     };
     rules = {
         email: [
@@ -95,11 +96,12 @@ export default class Button extends Vue {
 
     beforeMount() {
         console.log('mount');
+        this.role = sessionStorage.getItem('role') as string;
         if (sessionStorage.getItem('userid')) {
             this.userid = parseFloat(sessionStorage.getItem('userid') as string);
             this.username = sessionStorage.getItem('username') as string;
         }
-        fetch(`/api/user/${this.userid}`, {
+        fetch(`/api/user/${this.$route.params.userid}`, {
             method: 'GET',
         }).then(res => {
             return res.json();
@@ -110,7 +112,7 @@ export default class Button extends Vue {
                 this.form.phone = data.data.phone;
                 this.form.balance = (data.data.balance as number).toString();
                 this.form.role = data.data.role;
-                this.form.status = data.data.status;
+                this.form.status = (data.data.status as number).toString();
                 console.log(this.form.balance);
             } else {
                 this.$message({

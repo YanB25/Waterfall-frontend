@@ -51,6 +51,7 @@ export default class App extends Vue {
  }
  logout() {
    (this.$refs.leftMenu as any).refreshUserRole();
+   this.$router.push('/');
  }
 
 }

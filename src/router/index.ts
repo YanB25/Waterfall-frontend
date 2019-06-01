@@ -16,7 +16,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/profile',
+      path: '/profile/:userid',
       name: 'profile',
       component: Profile
     },

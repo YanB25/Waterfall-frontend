@@ -66,10 +66,10 @@
     </el-table-column>
     <el-table-column label="操作" :width="200">
       <template slot-scope="scope">
-        <el-button icon="el-icon-search" circle
-        @click="info(scope.$index, scope.row)"></el-button>
+        <!-- <el-button icon="el-icon-search" circle
+        @click="info(scope.$index, scope.row)"></el-button> -->
         <el-button type="primary" icon="el-icon-edit" circle
-         @click="provide(scope.$index, scope.row)">
+         @click="info(scope.$index, scope.row)">
         </el-button>
         <el-button type="danger" icon="el-icon-delete" circle
          @click="deleteUser(scope.$index, scope.row)">
@@ -126,6 +126,10 @@ export default class Button extends Vue {
       message: "not implemented",
       type: "error"
     })
+  }
+  info(index: number, row: object) {
+    let userid = sessionStorage.getItem('userid') as string;
+    this.$router.push(`/profile/${userid}`)
   }
   
 }
