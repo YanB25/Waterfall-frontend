@@ -12,9 +12,19 @@
   <el-form-item label="balance" prop="balance" >
     <el-input type="text" v-model.number="form.balance" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
-  <el-form-item label="role" prop="role" >
+  <!-- <el-form-item label="role" prop="role" >
     <el-input type="text" v-model="form.role" autocomplete="off" :disabled="role != 'manager'"></el-input>
-  </el-form-item>
+  </el-form-item> -->
+<el-form-item label="User Type" prop="role">
+    <el-select v-model="form.role" :disabled="role != 'manager'">
+    <el-option
+        v-for="item in usertypes"
+        :key="item.key"
+        :label="item.label"
+        :value="item.value"
+    ></el-option>
+    </el-select>
+</el-form-item>
   <el-form-item label="status" prop="status" >
     <el-input type="text" v-model="form.status" autocomplete="off" :disabled="role != 'manager'"></el-input>
   </el-form-item>
@@ -63,6 +73,23 @@ export default class Button extends Vue {
             { validator: this.checkPhone, trigger: 'blur' }
         ]
     }
+    usertypes = [
+        {
+        key: 0,
+        value: "provider",
+        label: "provider"
+        },
+        {
+        key: 1,
+        value: "customer",
+        label: "customer"
+        },
+        {
+          key: 2,
+          value: "manager",
+          label: "manager"
+        }
+    ]
     onSubmit(formName: string) {
         (this.$refs[formName] as LoginComponent).validate((valid: any) => {
             if (valid) {

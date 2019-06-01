@@ -127,9 +127,8 @@ export default class Button extends Vue {
       type: "error"
     })
   }
-  info(index: number, row: object) {
-    let userid = sessionStorage.getItem('userid') as string;
-    this.$router.push(`/profile/${userid}`)
+  info(index: number, row: TableDataInterface) {
+    this.$router.push(`/profile/${row.id}`)
   }
   
 }
