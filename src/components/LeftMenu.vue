@@ -36,9 +36,9 @@
           <i class="el-icon-document"></i>
           <span>Manager</span>
         </el-menu-item>
-        <el-menu-item index="/control-pane">
+        <el-menu-item index="/control-panel">
           <i class="el-icon-setting"></i>
-          <span>Control Pane</span>
+          <span>Control Panel</span>
         </el-menu-item>
       </el-menu>
     </el-col>

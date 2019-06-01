@@ -7,7 +7,7 @@ import MainOrder from '@/components/order/MainOrder.vue'
 import SubOrder from '@/components/order/SubOrder.vue'
 import MainOrderDetail from '@/components/order/MainOrderDetail.vue'
 import Welcome from '@/components/Welcome.vue'
-import ControlPane from '@/components/ControlPane.vue'
+import ControlPanel from '@/components/ControlPanel.vue'
 
 Vue.use(Router)
 
@@ -44,9 +44,9 @@ export default new Router({
       component: Welcome
     },
     {
-      path: '/control-pane',
-      name: 'control pane',
-      component: ControlPane
+      path: '/control-panel',
+      name: 'control panel',
+      component: ControlPanel
     }
   ]
 })
