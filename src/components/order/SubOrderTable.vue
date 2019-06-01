@@ -52,6 +52,13 @@
       label="Quantity"
       prop="quantity">
     </el-table-column>
+    <el-table-column label="Operation" v-if="role == 'manager'">
+      <template slot-scope="scope">
+        <el-button type="danger" icon="el-icon-delete" circle v-if="role == 'manager'"
+         @click="deleteOrder(scope.$index, scope.row)">
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 <script lang="ts">
@@ -69,6 +76,18 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+
+  role: string = '';
+  beforeMount() {
+    this.role = sessionStorage.getItem('role') as string;
+  }
+  deleteOrder(index: number, row: TableDataInterface) {
+    // TODO: to be finished
+    this.$message({
+      message: "not implemtend",
+      type: "error"
+    })
+  }
 }
 </script>
 

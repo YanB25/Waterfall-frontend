@@ -62,6 +62,9 @@
         <el-button type="primary" icon="el-icon-edit" circle
          @click="provide(scope.$index, scope.row)">
         </el-button>
+        <el-button type="danger" icon="el-icon-delete" circle
+         @click="deleteUser(scope.$index, scope.row)">
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -81,6 +84,13 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  deleteUser(index: number, row: object) {
+    //TODO:
+    this.$message({
+      message: "not implemented",
+      type: "error"
+    })
+  }
   
 }
 </script>

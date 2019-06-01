@@ -88,6 +88,9 @@
           :disabled="scope.row.remain_quantity == 0"
          @click="provide(scope.$index, scope.row)">
         </el-button>
+        <el-button type="danger" icon="el-icon-delete" circle v-if="role == 'manager'"
+         @click="deleteOrder(scope.$index, scope.row)">
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -125,6 +128,13 @@ export default class Button extends Vue {
     console.log(index, row);
     console.log(`debug, will go to ${row.id}`)
     this.$router.push(`/orders/provide/${row.id}`)
+  }
+  deleteOrder(index: number, row: TableDataInterface) {
+    // TODO: to be finished
+    this.$message({
+      message: "not implemtend",
+      type: "error"
+    })
   }
 }
 </script>
