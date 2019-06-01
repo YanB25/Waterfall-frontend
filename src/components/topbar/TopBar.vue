@@ -72,6 +72,7 @@ export default class Button extends Vue {
         sessionStorage.setItem('role', role);
         console.log(username);
         console.log(userid);
+        // console.log(`user id to string: ${userid.toString()}`)
         this.$router.push('/welcome');
     }
     beforeMount() {

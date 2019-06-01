@@ -1,8 +1,6 @@
 <template>
 <div>
-    <el-button @click="back">
-        back
-    </el-button>
+    <Back />
     <div>
         <p> Main Order Detail {{ $route.params.orderid }} </p>
     </div>
@@ -15,15 +13,14 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import SubOrderTable from '@/components/order/SubOrderTable.vue'
 import { Dictionary } from 'vue-router/types/router';
+import Back from '@/components/Back.vue'
 @Component({
     components: {
-        SubOrderTable
+        SubOrderTable,
+        Back
     }
 }) 
 export default class Button extends Vue {
-    back() {
-        this.$router.push('/orders/main');
-    }
     subOrdersList :Dictionary<string>[] = [];
     beforeMount() {
         fetch(`/api/order/mainOrder/${this.$route.params.orderid}/subOrders`)
