@@ -83,9 +83,26 @@ export default class Button extends Vue {
   }
   deleteOrder(index: number, row: TableDataInterface) {
     // TODO: to be finished
-    this.$message({
-      message: "not implemtend",
-      type: "error"
+    fetch(`/api/order/subOrder/${row.id}/cancel`)
+    .then(res => res.json())
+    .then(res => {
+      if (res.code === 0) {
+        this.$message({
+          message: `successfully cancel order ${row.id}`,
+          type: "success"
+        })
+        this.tableData[index].status = 4;
+      } else {
+        this.$message({
+          message: `failed: ${res.msg}`,
+          type: "error"
+        })
+      }
+    }).catch(err => {
+      this.$message({
+        message: `${err}`,
+        type: "error"
+      })
     })
   }
 }

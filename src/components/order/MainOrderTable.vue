@@ -88,7 +88,7 @@
           :disabled="scope.row.remain_quantity == 0"
          @click="provide(scope.$index, scope.row)">
         </el-button>
-        <el-button type="danger" icon="el-icon-delete" circle v-if="role == 'manager'"
+        <el-button type="danger" icon="el-icon-delete" circle v-if="role == 'manager' && scope.row.status != 4"
          @click="deleteOrder(scope.$index, scope.row)">
         </el-button>
       </template>
@@ -130,10 +130,29 @@ export default class Button extends Vue {
     this.$router.push(`/orders/provide/${row.id}`)
   }
   deleteOrder(index: number, row: TableDataInterface) {
+    console.log(`${row.id}`)
     // TODO: to be finished
-    this.$message({
-      message: "not implemtend",
-      type: "error"
+    fetch(`/api/order/mainOrder/${row.id}/cancel`, {
+      method: 'POST'
+    }).then(res => res.json())
+    .then(res => {
+      if (res.code === 0) {
+        this.$message({
+          message: `successfully cancel order ${row.id}`,
+          type: "success"
+        })
+        this.tableData[index].status = 4;
+      } else {
+        this.$message({
+          message: `err: ${res.msg}`,
+          type: "error"
+        })
+      }
+    }).catch(err => {
+      this.$message({
+        message: `err: ${err}`,
+        type: "error"
+      })
     })
   }
 }
