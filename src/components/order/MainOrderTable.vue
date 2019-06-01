@@ -84,7 +84,8 @@
       <template slot-scope="scope">
         <el-button icon="el-icon-search" circle
         @click="info(scope.$index, scope.row)"></el-button>
-        <el-button type="primary" icon="el-icon-edit" circle
+        <el-button type="primary" icon="el-icon-edit" circle v-if="role == 'provider'"
+          :disabled="scope.row.remain_quantity == 0"
          @click="provide(scope.$index, scope.row)">
         </el-button>
       </template>
@@ -114,6 +115,7 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  role: string = sessionStorage.getItem('role') as string;
   info(index: number, row: TableDataInterface) {
     console.log(index);
     console.log(row);

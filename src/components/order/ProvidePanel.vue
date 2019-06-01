@@ -87,7 +87,7 @@ export default class Login extends Vue {
                 method: 'POST',
                 body: JSON.stringify({
                     ...this.ruleForm,
-                    ...{ userid: this.userid }
+                    ...{ createuser: this.userid }
                 })
             }).then(res => res.json())
             .then(res => {

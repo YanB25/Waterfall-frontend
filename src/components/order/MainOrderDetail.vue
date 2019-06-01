@@ -36,13 +36,17 @@ export default class Button extends Vue {
                 console.log(res.data);
                 let quantity = res.data.order.quantity;
                 let remain = res.data.order.remain_quantity;
-                this.remain_percentage = (quantity - remain) / quantity;
+                if (remain == 0) {
+                    this.remain_percentage = 100;
+                } else {
+                    this.remain_percentage = ((quantity - remain) / quantity) * 100;
+                }
                 if (!res.data.order) {
                     this.remain_percentage = 0;
-                } else if (this.remain_percentage >= 1) {
-                    this.remain_percentage = 1;
+                } else if (this.remain_percentage >= 100) {
+                    this.remain_percentage = 100;
                 } else {
-                    this.remain_percentage *= 100;
+                    this.remain_percentage = Math.floor(this.remain_percentage);
                 }
                 console.log(remain, quantity, this.remain_percentage);
             })
