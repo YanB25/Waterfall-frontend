@@ -82,10 +82,10 @@
     </el-table-column>
     <el-table-column label="Operation">
       <template slot-scope="scope">
-        <el-button type="primary"
-          size="mini"
-          @click="click(scope.$index, scope.row)" > 
-            Detail
+        <el-button icon="el-icon-search" circle
+        @click="info(scope.$index, scope.row)"></el-button>
+        <el-button type="primary" icon="el-icon-edit" circle
+         @click="provide(scope.$index, scope.row)">
         </el-button>
       </template>
     </el-table-column>
@@ -114,10 +114,15 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
-  click(index: number, row: TableDataInterface) {
+  info(index: number, row: TableDataInterface) {
     console.log(index);
     console.log(row);
     this.$router.push(`/orders/main/${row.id}`)
+  }
+  provide(index: number, row: TableDataInterface) {
+    console.log(index, row);
+    console.log(`debug, will go to ${row.id}`)
+    this.$router.push(`/orders/provide/${row.id}`)
   }
 }
 </script>

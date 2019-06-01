@@ -8,6 +8,7 @@ import SubOrder from '@/components/order/SubOrder.vue'
 import MainOrderDetail from '@/components/order/MainOrderDetail.vue'
 import Welcome from '@/components/Welcome.vue'
 import ControlPanel from '@/components/ControlPanel.vue'
+import ProvidePanel from '@/components/order/ProvidePanel.vue'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/orders/sub/',
       name: 'Sub Orders',
       component: SubOrder
+    },
+    {
+      path: '/orders/provide/:orderid',
+      name: 'Provide Panel',
+      component: ProvidePanel
     },
     {
       path: '/',
