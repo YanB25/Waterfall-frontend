@@ -100,7 +100,9 @@
           :disabled="scope.row.remain_quantity == 0"
          @click="provide(scope.$index, scope.row)">
         </el-button>
-        
+        <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
+         @click="deleteOrder(scope.$index, scope.row)">
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -128,6 +130,8 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  @Prop() isme !: boolean;
+
   role: string = sessionStorage.getItem('role') as string;
   info(index: number, row: TableDataInterface) {
     console.log(index);
@@ -138,6 +142,32 @@ export default class Button extends Vue {
     console.log(index, row);
     console.log(`debug, will go to ${row.id}`)
     this.$router.push(`/orders/provide/${row.id}`)
+  }
+  deleteOrder(index: number, row: TableDataInterface) {
+    console.log(`${row.id}`)
+    // TODO: to be finished
+    fetch(`/api/order/mainOrder/${row.id}/cancel`, {
+      method: 'POST'
+    }).then(res => res.json())
+    .then(res => {
+      if (res.code === 0) {
+        this.$message({
+          message: `successfully cancel order ${row.id}`,
+          type: "success"
+        })
+        this.tableData[index].status = 4;
+      } else {
+        this.$message({
+          message: `err: ${res.msg}`,
+          type: "error"
+        })
+      }
+    }).catch(err => {
+      this.$message({
+        message: `err: ${err}`,
+        type: "error"
+      })
+    })
   }
 }
 </script>

@@ -138,9 +138,15 @@ export default class PlaceMainOrder extends Vue {
           })
           .then(res => {
               if (res.code === 0) {
-                  alert('success!');
+                  this.$message({
+                    message: 'success!',
+                    type: 'success'
+                  })
               } else {
-                  alert(`fail: ${res.data.msg}`)
+                 this.$message({
+                   message: `fail: ${res.data.msg}`,
+                   type: "error"
+                 });
               }
           })
           .catch(err => {

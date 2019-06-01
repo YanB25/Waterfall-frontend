@@ -55,12 +55,15 @@
       label="用户状态"
       prop="status">
     </el-table-column>
-    <el-table-column label="操作">
+    <el-table-column label="操作" >
       <template slot-scope="scope">
         <el-button icon="el-icon-search" circle
         @click="info(scope.$index, scope.row)"></el-button>
         <el-button type="primary" icon="el-icon-edit" circle
          @click="provide(scope.$index, scope.row)">
+        </el-button>
+        <el-button type="danger" icon="el-icon-delete" circle
+         @click="deleteUser(scope.$index, scope.row)">
         </el-button>
       </template>
     </el-table-column>
@@ -81,6 +84,13 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  deleteUser(index: number, row: object) {
+    //TODO:
+    this.$message({
+      message: "not implemented",
+      type: "error"
+    })
+  }
   
 }
 </script>

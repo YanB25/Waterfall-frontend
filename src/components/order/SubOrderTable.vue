@@ -52,6 +52,13 @@
       label="Quantity"
       prop="quantity">
     </el-table-column>
+    <el-table-column label="Operation" v-if="isme || role == 'manager'">
+      <template slot-scope="scope">
+        <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
+         @click="deleteOrder(scope.$index, scope.row)">
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 <script lang="ts">
@@ -69,6 +76,38 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  @Prop() isme !: boolean;
+
+  role: string = '';
+  beforeMount() {
+    this.role = sessionStorage.getItem('role') as string;
+  }
+  deleteOrder(index: number, row: TableDataInterface) {
+    // TODO: to be finished
+    fetch(`/api/order/subOrder/${row.id}/cancel`, {
+      method: 'POST'
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.code === 0) {
+        this.$message({
+          message: `successfully cancel order ${row.id}`,
+          type: "success"
+        })
+        this.tableData[index].status = 4;
+      } else {
+        this.$message({
+          message: `failed: ${res.msg}`,
+          type: "error"
+        })
+      }
+    }).catch(err => {
+      this.$message({
+        message: `${err}`,
+        type: "error"
+      })
+    })
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
- <MainOrderTable :tableData="tableData">
+ <MainOrderTable :tableData="tableData" v-loading="isloading" :isme="false">
  </MainOrderTable> 
 </template>
 <script lang="ts">
@@ -27,21 +27,8 @@ interface TableDataInterface {
   }
 })
 export default class Button extends Vue {
+  isloading: boolean = true;
   tableData = [{
-    // "address": "Mega Center North",
-    // "comments": "Very Quick!",
-    // "createdate": "2018-01-08 12:00:00",
-    // "createuser": 0,
-    // "deadline": "2018-01-09 11:11:11",
-    // "id": "1",
-    // "name": "Shrimp",
-    // "phone": "18900230024",
-    // "price": 200,
-    // "current_supply": 11,
-    // "quantity": 3,
-    // "status": 0,
-    // "summary": "All I need is Shrimp",
-    // "totalprice": 600,
   }]
   click(index: number, row: TableDataInterface) {
     console.log(index);
@@ -55,6 +42,13 @@ export default class Button extends Vue {
       return data.json();
     }).then(res => {
       this.tableData = res.data.orders;
+    }).catch(err => {
+      this.$message({
+        message: `err`,
+        type: "error"
+      })
+    }).finally(() => {
+      this.isloading = false;
     })
   }
 }

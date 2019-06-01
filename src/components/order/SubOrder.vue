@@ -1,5 +1,5 @@
 <template>
-  <SubOrderTable :tableData="tableData">
+  <SubOrderTable :tableData="tableData" v-loading="isloading" :isme="false">
   </SubOrderTable>
 </template>
 <script lang="ts">
@@ -22,6 +22,7 @@ interface TableDataInterface {
   }
 })
 export default class Button extends Vue {
+  isloading: boolean = true;
   tableData = []
   // click(index: number, row: TableDataInterface) {
   //   console.log(index);
@@ -35,6 +36,13 @@ export default class Button extends Vue {
       return data.json();
     }).then(res => {
       this.tableData = res.data.orders;
+    }).catch(err => {
+      this.$message({
+        message: `err`,
+        type: "error"
+      })
+    }).finally(() => {
+      this.isloading = false;
     })
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-form :model="form" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" v-loading="isloading">
   <el-form-item label="username" prop="username">
     <el-input type="text" v-model="this.username" autocomplete="off" :disabled="true"></el-input>
   </el-form-item>
@@ -39,6 +39,8 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Button extends Vue {
+    isloading: boolean = true;
+
     userid: number = -1;
     username: string = '';
     hasChanged: Boolean = false;
@@ -66,13 +68,26 @@ export default class Button extends Vue {
                 fetch(`/api/user/${this.userid}`, {
                     method: "POST",
                     body: JSON.stringify(this.form)
+                }).then(res => res.json())
+                .then(res => {
+                    if (res.code === 0) {
+                        this.$message({
+                            message: "successfully update profile",
+                            type: "success"
+                        })
+                        this.hasChanged = false;
+                    } else {
+                        this.$message({
+                            message: `update fail: ${res.msg}`,
+                            type: "error"
+                        });
+                    }
                 })
-                //TODO:
-                alert('submit!');
-                this.hasChanged = false;
             } else {
-                console.log('valida err');
-                alert("validation err");
+                this.$message({
+                    message: "validation error",
+                    type: "error"
+                });
                 return false;
             }
         });
@@ -98,9 +113,19 @@ export default class Button extends Vue {
                 this.form.status = data.data.status;
                 console.log(this.form.balance);
             } else {
-                alert(`err: ${data.msg}`)
+                this.$message({
+                    message: `err: ${data.msg}`,
+                    type: "error"
+                });
             }
-        });
+        }).catch(err => {
+            this.$message({
+                message: `err`,
+                type: "error"
+            })
+        }).finally(() => {
+            this.isloading = false;
+        })
     }
 
     checkEmail(rule: Object, value : string, callback: Callback) {

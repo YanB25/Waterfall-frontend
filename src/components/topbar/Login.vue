@@ -6,6 +6,7 @@
     ref="ruleForm"
     label-width="120px"
     class="demo-ruleForm"
+    v-loading="isloading"
     @keydown.enter="submitForm('ruleForm')"
   >
     <el-form-item label="User Name" prop="username">
@@ -36,6 +37,7 @@ interface LoginComponent extends Vue{
 
 @Component
 export default class Login extends Vue {
+    isloading: boolean = false;
     checkUsername(rule: object, value :number, callback: Callback) {
       if (!value) {
         return callback(new Error("Please input user name"));
@@ -62,9 +64,11 @@ export default class Login extends Vue {
       username: [{ validator: this.checkUsername, trigger: "blur" }]
     }
     submitForm(formName: string) {
+      this.isloading = true;
       console.log(formName);
       (this.$refs[formName] as LoginComponent).validate((valid: any) => {
         if (valid) {
+          this.isloading = true;
           fetch('/api/user/login', {
             method: 'POST',
             body: JSON.stringify({
@@ -76,21 +80,34 @@ export default class Login extends Vue {
             return res.json();
           })
           .then(data => {
+            this.isloading = false;
             if (data.code === 0) {
               fetch(`/api/user/${data.data.userid}`).then(res => res.json())
                 .then(res => {
                   console.log(`debug: emit ${data.data.userid}, ${res.data.role}`)
                   this.$emit('login', this.ruleForm.username, data.data.userid, res.data.role);
+                  this.$message({
+                    message: 'Login success!',
+                    type: 'success'
+                  });
                 })
             } else {
-              alert(`err to login: ${data.data.msg}`);
+              this.$message({
+                message: `err to login: ${data.data.msg}`,
+                type: 'error'
+              })
             }
           })
           .catch(err => {
-            console.log(err);
+            this.isloading = false;
+            this.$message({
+              message: `err: ${err}`,
+              type: 'error'
+            });
           })
           return true;
         } else {
+          this.isloading = false;
           console.log("error submit!!");
           return false;
         }
@@ -98,6 +115,7 @@ export default class Login extends Vue {
     }
     resetForm(formName: string) {
       (this.$refs[formName] as LoginComponent).resetFields();
+      this.isloading = false;
     }
 };
 </script>

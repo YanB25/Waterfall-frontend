@@ -6,6 +6,7 @@
     ref="ruleForm"
     label-width="120px"
     class="demo-ruleForm"
+    v-loading="isloading"
   >
     <el-form-item label="User Name" prop="username">
       <el-input v-model.number="ruleForm.username" @keyup.enter.native="submitForm('ruleForm')"></el-input>
@@ -56,6 +57,7 @@ interface SignUpComponent extends Vue {
 
 @Component
 export default class SignUp extends Vue {
+  isloading: boolean = false;
   checkUsername(rule: object, value: number, callback: Callback) {
     if (!value) {
       return callback(new Error("Please input user name"));
@@ -147,9 +149,19 @@ export default class SignUp extends Vue {
     // }
   ]
   submitForm(formName: string) {
+    this.isloading = true;
     console.log(formName);
     (this.$refs[formName] as SignUpComponent).validate((valid: any) => {
       if (valid) {
+        let usertype = this.ruleForm.usertype;
+        if (usertype != 'customer' && usertype != 'provider') {
+          this.$message({
+            message: "you should set your user type",
+            type: "error"
+          });
+          this.isloading = false;
+          return;
+        }
         fetch("/api/user/register", {
           method: "POST",
           body: JSON.stringify({
@@ -166,19 +178,36 @@ export default class SignUp extends Vue {
           .then(data => {
             if (data.code === 0) {
               this.$emit("login", this.ruleForm.username, data.data.userid, this.ruleForm.usertype);
+              this.isloading = false;
+            } else {
+              this.$message({
+                message: `err: data.msg`,
+                type: "error"
+              })
+              this.isloading = false;
             }
           })
           .catch(err => {
-            console.log(err);
+            this.$message({
+              message: `err: ${err}`,
+              type: "error"
+            });
+            this.isloading = false;
           });
+        this.isloading = false;
         return true;
       } else {
-        console.log("error submit!!");
+        this.$message({
+          message: "error in your entering fields",
+          type: "error"
+        })
+        this.isloading = false;
         return false;
       }
     });
   }
   resetForm(formName: string) {
+    this.isloading = false;
     (this.$refs[formName] as SignUpComponent).resetFields();
   }
 }
