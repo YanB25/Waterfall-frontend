@@ -94,7 +94,7 @@ export default class Login extends Vue {
                 if (res.code === 0) {
                     this.$message({
                         message: "success",
-                        type: "error"
+                        type: "success"
                     })
                 } else {
                     this.$message({
@@ -102,6 +102,11 @@ export default class Login extends Vue {
                         type: "error"
                     })
                 }
+            }).catch(err => {
+                this.$message({
+                    message: `${err}`,
+                    type: "error"
+                })
             })
         } else {
           console.log("error submit!!");

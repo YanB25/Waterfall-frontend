@@ -181,7 +181,7 @@ export default class SignUp extends Vue {
               this.isloading = false;
             } else {
               this.$message({
-                message: `err: data.msg`,
+                message: `err: ${data.msg}`,
                 type: "error"
               })
               this.isloading = false;

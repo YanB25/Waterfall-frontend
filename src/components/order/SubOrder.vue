@@ -38,7 +38,7 @@ export default class Button extends Vue {
       this.tableData = res.data.orders;
     }).catch(err => {
       this.$message({
-        message: `err`,
+        message: `${err}`,
         type: "error"
       })
     }).finally(() => {

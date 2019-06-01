@@ -154,7 +154,10 @@ export default class PlaceMainOrder extends Vue {
           });
         return true;
       } else {
-        console.log("error submit!!");
+        this.$message({
+          message: "err when submitting",
+          type: "error"
+        })
         return false;
       }
     });
