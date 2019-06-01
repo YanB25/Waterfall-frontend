@@ -66,14 +66,20 @@
     </el-table-column>
     <el-table-column label="操作" :width="200">
       <template slot-scope="scope">
-        <!-- <el-button icon="el-icon-search" circle
-        @click="info(scope.$index, scope.row)"></el-button> -->
-        <el-button type="primary" icon="el-icon-edit" circle
-         @click="info(scope.$index, scope.row)">
-        </el-button>
-        <el-button type="danger" icon="el-icon-delete" circle
-         @click="deleteUser(scope.$index, scope.row)">
-        </el-button>
+          <!-- <el-tooltip content="查看详情" placement="bottom" :enterable=false>
+          <el-button icon="el-icon-search" circle
+          @click="info(scope.$index, scope.row)"></el-button>
+        </el-tooltip> -->
+          <el-tooltip content="编辑用户资料" placement="bottom" :enterable=false>
+          <el-button type="primary" icon="el-icon-edit" circle
+          @click="provide(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
+        <el-tooltip content="删除用户" placement="bottom" :enterable=false>
+          <el-button type="danger" icon="el-icon-delete" circle
+          @click="deleteUser(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
       </template>
     </el-table-column>
   </el-table>
