@@ -17,7 +17,7 @@
       <el-input v-model="ruleForm.address"></el-input>
     </el-form-item>
     <el-form-item label="Comments" prop="comments">
-      <el-input v-model="ruleForm.comments" type="textarea" :rows="3"></el-input>
+      <el-input v-model="ruleForm.comments" type="textarea" :rows="3" placeholder="Optinal"></el-input>
     </el-form-item>
     <!-- create date -->
     <!-- create user -->

@@ -15,10 +15,10 @@
       <el-input v-model="ruleForm.quantity" auto-complete="off" @keyup.enter="submitForm('fuleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Comments" prop="comments">
-      <el-input v-model="ruleForm.comments" type="textarea" :rows="3"></el-input>
+      <el-input v-model="ruleForm.comments" type="textarea" :rows="3" placeholder="Optinal"></el-input>
     </el-form-item>
     <el-form-item label="Phone" prop="phone">
-      <el-input v-model="ruleForm.phone"></el-input>
+      <el-input v-model="ruleForm.phone" placeholder="Optional"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')" >Submit</el-button>
