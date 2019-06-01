@@ -5,14 +5,14 @@
     </div>
 
     <div v-if="role=='provider'">
-        <SubOrderTable :tableData="tableData">
+        <SubOrderTable :tableData="tableData" :isme="true">
             //TODO:
         </SubOrderTable>
     </div>
     <div v-if="role=='customer'">
         <PlaceMainOrder>
         </PlaceMainOrder>
-        <MainOrderTable :tableData="tableData" class="atbottom">
+        <MainOrderTable :tableData="tableData" class="atbottom" :isme="true">
             //TODO:
         </MainOrderTable>
     </div>

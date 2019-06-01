@@ -1,5 +1,5 @@
 <template>
-  <SubOrderTable :tableData="tableData" v-loading="isloading">
+  <SubOrderTable :tableData="tableData" v-loading="isloading" :isme="false">
   </SubOrderTable>
 </template>
 <script lang="ts">

@@ -88,7 +88,7 @@
           :disabled="scope.row.remain_quantity == 0"
          @click="provide(scope.$index, scope.row)">
         </el-button>
-        <el-button type="danger" icon="el-icon-delete" circle v-if="role == 'manager' && scope.row.status != 4"
+        <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
          @click="deleteOrder(scope.$index, scope.row)">
         </el-button>
       </template>
@@ -118,6 +118,8 @@ interface TableDataInterface {
 @Component
 export default class Button extends Vue {
   @Prop() tableData !: TableDataInterface[];
+  @Prop() isme !: boolean;
+
   role: string = sessionStorage.getItem('role') as string;
   info(index: number, row: TableDataInterface) {
     console.log(index);

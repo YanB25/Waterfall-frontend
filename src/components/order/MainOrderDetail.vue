@@ -5,7 +5,7 @@
         <p> Main Order Detail {{ $route.params.orderid }} </p>
     </div>
     <el-progress :text-inside="true" :stroke-width="26" :percentage="remain_percentage"></el-progress>
-    <SubOrderTable :tableData="subOrdersList">
+    <SubOrderTable :tableData="subOrdersList" :isme="false">
     </SubOrderTable>
 </div>
 </template>
