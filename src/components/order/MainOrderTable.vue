@@ -76,9 +76,12 @@
       prop="price">
     </el-table-column>
     <el-table-column
-      sortable
-      label="Rem Quantity"
-      prop="remain_quantity">
+      label="完成情况"
+      >
+      <template slot-scope="scope">
+        <el-progress type="circle" :percentage="100 - scope.row.remain_quantity" width="45" stroke-width="4" show-text="false" v-if="scope.row.remain_quantity != 0"></el-progress>
+        <el-progress type="circle" :percentage="100" width="45" stroke-width="4" show-text="false" status="success" v-else></el-progress>
+      </template>
     </el-table-column>
     <el-table-column label="Operation">
       <template slot-scope="scope">
