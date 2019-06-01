@@ -84,8 +84,8 @@
           <el-progress type="circle" :percentage="100 - scope.row.remain_quantity" width="45" stroke-width="4" v-if="scope.row.remain_quantity != 0"></el-progress>
           <el-progress type="circle" :percentage="100" width="45" stroke-width="4" status="success" v-else></el-progress>
         </template> -->
-        <el-progress type="circle" :percentage="100 - scope.row.remain_quantity" :width="45" :stroke-width="4" v-if="scope.row.status == 1"></el-progress>
-        <el-progress type="circle" :percentage="100 - scope.row.remain_quantity" :width="45" :stroke-width="4" status="warning" v-if="scope.row.status == 2"></el-progress>
+        <el-progress type="circle" :percentage="(scope.row.quantity - scope.row.remain_quantity) * 100 / scope.row.quantity" :width="45" :stroke-width="4" v-if="scope.row.status == 1"></el-progress>
+        <el-progress type="circle" :percentage="(scope.row.quantity - scope.row.remain_quantity) * 100 / scope.row.quantity" :width="45" :stroke-width="4" status="warning" v-if="scope.row.status == 2"></el-progress>
         <el-progress type="circle" :percentage="100" :width="45" :stroke-width="4" status="success" v-if="scope.row.status == 3"></el-progress>
         <el-progress type="circle" :percentage="100" :width="45" :stroke-width="4" status="exception" v-if="scope.row.status == 4"></el-progress>
         <!-- <el-tag type="success" disable-transitions effect="dark" v-if="scope.row.status == 3">完成</el-tag>
@@ -97,7 +97,7 @@
         <el-button icon="el-icon-search" circle
         @click="info(scope.$index, scope.row)"></el-button>
         <el-button type="primary" icon="el-icon-edit" circle v-if="role == 'provider'"
-          :disabled="scope.row.remain_quantity == 0"
+          :disabled="scope.row.remain_quantity == 0 || scope.row.status != 1"
          @click="provide(scope.$index, scope.row)">
         </el-button>
         <el-button type="danger" icon="el-icon-delete" circle v-if="(isme || role == 'manager') && scope.row.status != 4"
@@ -145,7 +145,6 @@ export default class Button extends Vue {
   }
   deleteOrder(index: number, row: TableDataInterface) {
     console.log(`${row.id}`)
-    // TODO: to be finished
     fetch(`/api/order/mainOrder/${row.id}/cancel`, {
       method: 'POST'
     }).then(res => res.json())
