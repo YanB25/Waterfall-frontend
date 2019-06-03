@@ -18,7 +18,7 @@
       <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Email" prop="email">
-      <el-input v-model.number="ruleForm.email" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+      <el-input v-model="ruleForm.email" @keyup.enter.native="submitForm('ruleForm')"></el-input>
     </el-form-item>
     <el-form-item label="Phone" prop="phone">
       <el-input v-model="ruleForm.phone" @keyup.enter.native="submitForm('ruleForm')"></el-input>
