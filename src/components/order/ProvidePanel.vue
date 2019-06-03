@@ -111,7 +111,7 @@ export default class Login extends Vue {
                     })
                 } else {
                   this.$message({
-                    message: `err: ${res.msg}`,
+                    message: `err: ${res.data.msg}`,
                     type: "error"
                   });
                 }

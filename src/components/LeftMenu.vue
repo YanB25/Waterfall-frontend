@@ -72,6 +72,7 @@ export default class Button extends Vue {
   }
   refreshUserRole() {
     let get_role = sessionStorage.getItem('role');
+    this.profilePath = `/profile/${sessionStorage.getItem('userid')}`;
     if (get_role == null) {
       this.role = "guest";
     } else {
@@ -81,7 +82,6 @@ export default class Button extends Vue {
   }
   beforeMount() {
     this.refreshUserRole();
-    this.profilePath = `/profile/${sessionStorage.getItem('userid')}`;
   }
 }
 </script>
