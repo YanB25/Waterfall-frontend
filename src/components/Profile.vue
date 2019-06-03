@@ -107,7 +107,7 @@ export default class Button extends Vue {
                         this.hasChanged = false;
                     } else {
                         this.$message({
-                            message: `update fail: ${res.msg}`,
+                            message: `update fail: ${res.data.msg}`,
                             type: "error"
                         });
                     }
