@@ -95,7 +95,7 @@ export default class Welcome extends Vue {
         color: #409EFF;
     }
     .hint-text {
-        font-size: 24px;
+        font-size: 22px;
         color: #CCC;
     }
     .hint-num {
