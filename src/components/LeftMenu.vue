@@ -8,6 +8,12 @@
         @close="handleClose"
         :router="true"
       >
+        <el-menu-item index="/welcome">
+          <template slot="title">
+            <i class="el-icon-odometer"></i>
+            <span>Home Page</span>
+          </template>
+        </el-menu-item>
         <el-submenu index="/orders">
           <template slot="title">
             <i class="el-icon-tickets"></i>
