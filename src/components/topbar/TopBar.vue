@@ -1,6 +1,8 @@
 <template>
     <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">Processing Center</el-menu-item>
+        <el-menu-item index="1" ><img class="logo" src="static/logo.png" /></el-menu-item>
+        
+        <el-menu-item index="2">Processing Center</el-menu-item>
         <el-popover
             v-if="!hasLogin"
             class="item"
@@ -34,6 +36,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import SignUp from "./SignUp.vue";
 import Login from "./Login.vue";
 import Username from './Username.vue';
+
 
 @Component({
     components: {
@@ -97,5 +100,16 @@ export default class Button extends Vue {
 .item {
     float: right !important;
     margin: 10px;
+}
+.logo {
+    max-width: 45px;
+    line-height: 50px;
+}
+.user-container > i{
+    padding: 0px 5px;
+    font-size: 16px;
+}
+.logout-btn {
+    cursor: pointer;
 }
 </style>
