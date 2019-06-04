@@ -5,21 +5,21 @@
             <el-card shadow="always">
                 <i class="hint-icon el-icon-document"></i>
                 <span class="hint-text" >Actived Order</span>
-                <span class="hint-num">99</span>
+                <span class="hint-num">24</span>
             </el-card>
         </el-col>
         <el-col :span="8">
             <el-card shadow="always">
                 <i class="hint-icon el-icon-document-checked"></i>
                 <span class="hint-text" >Finished Order</span>
-                <span class="hint-num">99</span>
+                <span class="hint-num">3</span>
             </el-card>
         </el-col>
         <el-col :span="8">
             <el-card shadow="always">
                 <i class="hint-icon el-icon-money"></i>
                 <span class="hint-text" >Balance</span>
-                <span class="hint-num">99</span>
+                <span class="hint-num">121</span>
             </el-card>
         </el-col>
     </el-row>
@@ -31,8 +31,8 @@
                     <span class="hint-text"> Finish Rate</span>
                 </div>
                 <div class="box-content graph">
-                    <el-progress type="circle" :width="300" :stroke-width="30" :percentage="30"></el-progress>
-                    <p>33 Finished / 99 Actived</p>
+                    <el-progress type="circle" :width="300" :stroke-width="30" :percentage="300/24"></el-progress>
+                    <p>3 Finished / 24 Actived</p>
                 </div>
             </el-card>
         </el-col>
@@ -40,7 +40,7 @@
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
                     <span class="hint-text">Latest Orders</span>
-                    <el-button class="view-more" type="text">View More ></el-button>
+                    <el-button class="view-more" type="text" @click="$router.push('/orders/main')">View More ></el-button>
                 </div>
                 <div class="box-content">
                     
@@ -56,9 +56,9 @@
                     <span class="hint-text"> Shortcuts</span>
                 </div>
                 <div>
-                    <el-button icon="el-icon-tickets">Orders</el-button>
-                    <el-button icon="el-icon-user">Profile</el-button>
-                    <el-button icon="el-icon-setting">Control Panel</el-button>
+                    <el-button icon="el-icon-tickets" @click="$router.push('/orders/main')">Orders</el-button>
+                    <el-button icon="el-icon-user" @click="goProfile">Profile</el-button>
+                    <el-button icon="el-icon-setting" @click="$router.push('/control-panel')">Control Panel</el-button>
                 </div>
             </el-card>
         </el-col>
@@ -68,7 +68,23 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-export default class Button extends Vue {
+@Component
+export default class Welcome extends Vue {
+    goProfile() {
+        fetch('/api/user/login')
+        .then(res => res.json())
+        .then(res => {
+            console.log('try')
+            this.$router.push(`/profile/${res.data.userid}`);
+            console.log('work!')
+        }).catch(err => {
+            console.log(err);
+            // this.$message({
+            //     message: `${err}`,
+            //     type: "error"
+            // });
+        })
+    }
     
 }
 </script>

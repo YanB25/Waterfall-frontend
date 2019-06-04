@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@types/validator": "^10.11.0",
-    "element-ui": "^2.3.4",
+    "element-ui": "^2.9.1",
     "ts-loader": "3.5",
     "validator": "^11.0.0",
     "vue": "^2.5.16",
