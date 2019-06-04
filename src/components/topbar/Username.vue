@@ -1,12 +1,9 @@
 <template>
-  <el-popover
-    placement="bottom"
-    :title="username"
-    width="200"
-    trigger="hover"
-  >
-    <el-button @click="logout">Log Out</el-button>
-    <el-button type="text" slot="reference"> {{ username }} </el-button>
+  <el-popover placement="bottom" width="200" trigger="hover">
+    <el-collapse>
+      <el-collapse-item class="logout-btn" title="Log Out" name="1" @click.native.prevent="logout"></el-collapse-item>
+    </el-collapse>
+    <el-button type="text" slot="reference"><div class="user-container"><i class="el-icon-user"></i>{{ username }}</div></el-button>
   </el-popover>
 </template>
 

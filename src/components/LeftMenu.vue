@@ -1,7 +1,6 @@
 <template>
   <el-row class="tac" v-if="this.role != 'guest'">
     <el-col :span="24">
-      <h5>Default colors</h5>
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
@@ -11,7 +10,7 @@
       >
         <el-submenu index="/orders">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-tickets"></i>
             <span>Orders</span>
           </template>
           <el-menu-item-group title="select orders">
@@ -28,19 +27,19 @@
         </el-submenu>
         <el-menu-item :index="profilePath">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-user"></i>
             <span>Profile</span>
           </template>
         </el-menu-item>
         <el-submenu index="/manage" v-if="this.role == 'manager'">
           <template slot="title">
             <i class="el-icon-setting"></i>
-            <span>后台管理</span>
+            <span>Manage Center</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/manage/user">用户管理</el-menu-item>
-            <el-menu-item index="/manage/mainorder">母订单管理</el-menu-item>
-            <el-menu-item index="/manage/suborder">子订单管理</el-menu-item>
+            <el-menu-item index="/manage/user">User Management</el-menu-item>
+            <el-menu-item index="/manage/mainorder">Main Order Management</el-menu-item>
+            <el-menu-item index="/manage/suborder">Sub Order Management</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/control-panel"  v-if="this.role != 'manager'">

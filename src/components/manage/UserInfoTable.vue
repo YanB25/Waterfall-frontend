@@ -6,25 +6,25 @@
     <el-table-column type="expand">
       <template slot-scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
-          <el-form-item label="用户ID">
+          <el-form-item label="User ID">
             <span>{{ props.row.id }}</span>
           </el-form-item>
-          <el-form-item label="用户名">
+          <el-form-item label="User Name">
             <span>{{ props.row.username }}</span>
           </el-form-item>
-          <el-form-item label="余额">
+          <el-form-item label="Balance">
             <span>{{ props.row.balance }}</span>
           </el-form-item>
-          <el-form-item label="电话">
+          <el-form-item label="Phone">
             <span>{{ props.row.phone }}</span>
           </el-form-item>
           <el-form-item label="E-mail">
             <span>{{ props.row.email }}</span>
           </el-form-item>
-          <el-form-item label="类型">
+          <el-form-item label="User Type">
             <span>{{ props.row.role }}</span>
           </el-form-item>
-          <el-form-item label="状态">
+          <el-form-item label="User Status">
             <span>{{ props.row.status }}</span>
           </el-form-item>
         </el-form>
@@ -32,50 +32,50 @@
     </el-table-column>
     <el-table-column
       sortable
-      label="用户ID"
+      label="User ID"
       prop="id">
     </el-table-column>
     <el-table-column
       sortable
-      label="用户名"
+      label="User Name"
       prop="username">
     </el-table-column>
     <el-table-column
       sortable
-      label="用户余额"
+      label="Balance"
       prop="balance">
     </el-table-column>
     <el-table-column
       sortable
-      label="用户类型"
+      label="User Type"
       prop="role">
     </el-table-column>
     <el-table-column
       sortable
-      label="用户状态"
+      label="User Status"
       prop="status"
       :width="200">
       <template slot-scope="scope">
         <el-switch
         :value="!scope.row.status"
-        active-text="已激活"
-        inactive-text="未激活"
+        active-text="Active"
+        inactive-text="Inactive"
         @change="changeUserStatus(scope.$index, scope.row)">
         </el-switch>
       </template>
     </el-table-column>
-    <el-table-column label="操作" :width="200">
+    <el-table-column label="Operation" :width="200">
       <template slot-scope="scope">
           <!-- <el-tooltip content="查看详情" placement="bottom" :enterable=false>
           <el-button icon="el-icon-search" circle
           @click="info(scope.$index, scope.row)"></el-button>
         </el-tooltip> -->
-          <el-tooltip content="编辑用户资料" placement="bottom" :enterable=false>
+          <el-tooltip content="Edit User Info" placement="bottom" :enterable=false>
           <el-button type="primary" icon="el-icon-edit" circle
           @click="info(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
-        <el-tooltip content="删除用户" placement="bottom" :enterable=false>
+        <el-tooltip content="Delete User" placement="bottom" :enterable=false>
           <el-button type="danger" icon="el-icon-delete" circle
           @click="deleteUser(scope.$index, scope.row)">
           </el-button>
@@ -109,7 +109,7 @@ export default class Button extends Vue {
     .then(res => {
       if (res.code === 0) {
         this.$message({
-          message: `成功修改用户 ${row.username}`,
+          message: `Successfully edited ${row.username}`,
           type: "success"
         })
         this.tableData[index].status = 1 - row.status;
