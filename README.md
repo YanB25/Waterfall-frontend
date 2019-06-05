@@ -30,6 +30,7 @@ npm run build
 ```
 It generates bundled files(e.g. `index.html` and `index.js`) to `dict/`. A http server(like `nginx`) is needed to serve them.
 
+Also the server need to serve the static files in `static/` with a url like `/startic/*`.
 ## docker
 To build the project into docker image, it's as simple as
 
