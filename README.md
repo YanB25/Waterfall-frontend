@@ -23,7 +23,7 @@ yarn
 ``` bash
 npm run dev
 ```
-## ... in production mode
+### ... in production mode
 
 ``` bash
 npm run build
